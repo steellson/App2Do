@@ -13,11 +13,10 @@ final class WelcomeViewController: BaseController {
     
     private func setupStartButton() {
         startButton.setTitle("Let's Start!", for: .normal)
-        
         startButton.backgroundColor = .white.withAlphaComponent(0.8)
-        startButton.layer.cornerRadius = 14
-        startButton.layer.borderColor = .init(gray: 1, alpha: 1)
-        startButton.layer.borderWidth = 0.5
+        startButton.layer.cornerRadius = 12
+        startButton.makeBorder(of: 0.3)
+        startButton.makeShadow(opacity: 1)
         
         startButton.addTarget(self, action: #selector(startButtonTarget), for: .touchUpInside)
     }
@@ -51,8 +50,9 @@ extension WelcomeViewController {
 private extension WelcomeViewController {
     
     @objc func startButtonTarget() {
+        let tdController = TDViewController()
+        tdController.modalPresentationStyle = .fullScreen
         
-        let webViewController = WebViewController()
-        present(webViewController, animated: true)
+        self.present(tdController, animated: true)
     }
 }
