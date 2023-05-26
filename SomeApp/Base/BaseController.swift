@@ -24,7 +24,7 @@ class BaseController: UIViewController {
 @objc extension BaseController {
     
      func setupView() {
-         view.backgroundColor = UIColor(red: 164/255, green: 211/255, blue: 121/255, alpha: 1)
+         view.backgroundColor = R.Colors.mainBackgroundColor
      }
     
      func setupNavBar() { }

@@ -63,7 +63,7 @@ extension TDViewController {
 extension TDViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -74,7 +74,7 @@ extension TDViewController: UICollectionViewDataSource {
 
 extension TDViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        .init(width: view.bounds.width - 12, height: view.bounds.height / 4)
+        .init(width: view.bounds.width - 12, height: view.bounds.height / 8)
     }
 }
 

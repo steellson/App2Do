@@ -12,8 +12,8 @@ final class WelcomeViewController: BaseController {
     private let startButton = UIButton(type: .system)
     
     private func setupStartButton() {
-        startButton.setTitle("Let's Start!", for: .normal)
-        startButton.backgroundColor = .white.withAlphaComponent(0.8)
+        startButton.setTitle(R.Strings.startButtonTitle.rawValue, for: .normal)
+        startButton.backgroundColor = R.Colors.alphaColor
         startButton.layer.cornerRadius = 12
         startButton.makeBorder(of: 0.3)
         startButton.makeShadow(opacity: 1)
