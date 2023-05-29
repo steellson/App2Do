@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D68C0A42A1FC41A005BB354 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D68C0A32A1FC41A005BB354 /* NavigationView.swift */; };
 		3D68C0A82A1FC4C6005BB354 /* TDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D68C0A72A1FC4C6005BB354 /* TDViewController.swift */; };
 		3D68C0AA2A1FFB18005BB354 /* TDCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D68C0A92A1FFB18005BB354 /* TDCell.swift */; };
 		3D6E6AA52A1E902E0072A9C4 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6E6AA42A1E902E0072A9C4 /* BaseController.swift */; };
@@ -16,6 +15,8 @@
 		3D6E6AB72A1E98390072A9C4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3D6E6AB62A1E98390072A9C4 /* SnapKit */; };
 		3DB45BF42A213B5100999750 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45BF32A213B5100999750 /* Resources.swift */; };
 		3DB45BF92A25374E00999750 /* TDTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45BF82A25374E00999750 /* TDTask.swift */; };
+		3DB45BFB2A25434B00999750 /* ModeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45BFA2A25434B00999750 /* ModeSelectionView.swift */; };
+		3DB45BFE2A25460A00999750 /* ModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45BFD2A25460A00999750 /* ModeView.swift */; };
 		3DCC8B0B2A1E118800204A82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0A2A1E118800204A82 /* AppDelegate.swift */; };
 		3DCC8B0D2A1E118800204A82 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0C2A1E118800204A82 /* SceneDelegate.swift */; };
 		3DCC8B0F2A1E118800204A82 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0E2A1E118800204A82 /* WelcomeViewController.swift */; };
@@ -24,7 +25,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3D68C0A32A1FC41A005BB354 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		3D68C0A72A1FC4C6005BB354 /* TDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDViewController.swift; sourceTree = "<group>"; };
 		3D68C0A92A1FFB18005BB354 /* TDCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDCell.swift; sourceTree = "<group>"; };
 		3D6E6AA42A1E902E0072A9C4 /* BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
@@ -32,6 +32,8 @@
 		3D6E6AAD2A1E92470072A9C4 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		3DB45BF32A213B5100999750 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		3DB45BF82A25374E00999750 /* TDTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDTask.swift; sourceTree = "<group>"; };
+		3DB45BFA2A25434B00999750 /* ModeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectionView.swift; sourceTree = "<group>"; };
+		3DB45BFD2A25460A00999750 /* ModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeView.swift; sourceTree = "<group>"; };
 		3DCC8B072A1E118800204A82 /* SomeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DCC8B0A2A1E118800204A82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DCC8B0C2A1E118800204A82 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,14 +55,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3D68C0A22A1FC3E8005BB354 /* NavigationBar */ = {
-			isa = PBXGroup;
-			children = (
-				3D68C0A32A1FC41A005BB354 /* NavigationView.swift */,
-			);
-			path = NavigationBar;
-			sourceTree = "<group>";
-		};
 		3D6E6AA82A1E90460072A9C4 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +97,7 @@
 			children = (
 				3DCC8B0E2A1E118800204A82 /* WelcomeViewController.swift */,
 				3D68C0A72A1FC4C6005BB354 /* TDViewController.swift */,
+				3DB45BFC2A25451F00999750 /* ModeSelectionBlock */,
 				3DB45BF22A213B3000999750 /* Cells */,
 			);
 			path = Views;
@@ -122,6 +117,15 @@
 				3DB45BF82A25374E00999750 /* TDTask.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		3DB45BFC2A25451F00999750 /* ModeSelectionBlock */ = {
+			isa = PBXGroup;
+			children = (
+				3DB45BFA2A25434B00999750 /* ModeSelectionView.swift */,
+				3DB45BFD2A25460A00999750 /* ModeView.swift */,
+			);
+			path = ModeSelectionBlock;
 			sourceTree = "<group>";
 		};
 		3DCC8AFE2A1E118800204A82 = {
@@ -146,7 +150,6 @@
 				3D6E6AB42A1E93F30072A9C4 /* App */,
 				3D6E6AA82A1E90460072A9C4 /* Base */,
 				3DB45BF72A25372F00999750 /* Entities */,
-				3D68C0A22A1FC3E8005BB354 /* NavigationBar */,
 				3DB45BF12A213B2600999750 /* Views */,
 				3D6E6AAC2A1E92290072A9C4 /* Extensions */,
 				3D6E6AA92A1E908B0072A9C4 /* Source */,
@@ -232,9 +235,10 @@
 			files = (
 				3DCC8B0F2A1E118800204A82 /* WelcomeViewController.swift in Sources */,
 				3D6E6AAE2A1E92470072A9C4 /* UIView+Extension.swift in Sources */,
-				3D68C0A42A1FC41A005BB354 /* NavigationView.swift in Sources */,
 				3D68C0AA2A1FFB18005BB354 /* TDCell.swift in Sources */,
+				3DB45BFB2A25434B00999750 /* ModeSelectionView.swift in Sources */,
 				3DCC8B0B2A1E118800204A82 /* AppDelegate.swift in Sources */,
+				3DB45BFE2A25460A00999750 /* ModeView.swift in Sources */,
 				3D6E6AA72A1E903A0072A9C4 /* BaseView.swift in Sources */,
 				3D6E6AA52A1E902E0072A9C4 /* BaseController.swift in Sources */,
 				3DB45BF42A213B5100999750 /* Resources.swift in Sources */,

@@ -9,7 +9,43 @@ import SnapKit
 
 final class TDViewController: BaseController {
     
-    private let navigationView = NavigationView()
+    private let greatingTitle: UILabel = {
+        let lable = UILabel()
+        return lable
+    }()
+    
+    private let greatingSubtitle: UILabel = {
+        let lable = UILabel()
+        return lable
+    }()
+    
+    private let searchView: UIView = {
+        let search = UIView()
+        return search
+    }()
+    
+    private let dateLable: UILabel = {
+        let lable = UILabel()
+        return lable
+    }()
+    
+    private let modeSelectionView = ModeSelectionView()
+    
+    private let addButton: UIButton = {
+        let button = UIButton()
+        return button
+    }()
+    
+    private let calendarButton: UIButton = {
+        let button = UIButton()
+        return button
+    }()
+    
+    private let todayTasksLable: UILabel = {
+        let lable = UILabel()
+        return lable
+    }()
+    
     private var tdCollectionView: UICollectionView!
     
     private let tdTasksData = TDData().tasks
@@ -35,26 +71,27 @@ extension TDViewController {
     
     override func setupView() {
         super.setupView()
-                
-        setupTDCollectionView()
-        view.addNewSubbview(tdCollectionView)
         
-        navigationView.makeShadow(opacity: 1)
-        view.addNewSubbview(navigationView)
+        setupTDCollectionView()
+        
+        // Add subbviews
+        [
+            greatingTitle, greatingSubtitle, searchView, dateLable,
+            modeSelectionView, addButton, calendarButton, todayTasksLable, tdCollectionView
+        ].forEach { view.addNewSubbview($0) }
     }
 
     override func setupLayout() {
         super.setupLayout()
         
-        let screenHeight = view.bounds.height
-        
-        navigationView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(screenHeight / 3)
+        modeSelectionView.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().offset(80)
+            $0.width.equalTo(400)
+            $0.height.equalTo(100)
         }
                 
         tdCollectionView.snp.makeConstraints {
-            $0.top.equalTo(navigationView.snp.bottom).offset(12)
+            $0.top.equalTo(modeSelectionView.snp.bottom).offset(20)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
