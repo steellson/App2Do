@@ -8,6 +8,21 @@ import UIKit
 
 
 final class TDCell: UICollectionViewCell {
+    
+    private var textLabel: UILabel = {
+       let label = UILabel()
+        return label
+    }()
+    
+    private var priorityView: UIView = {
+       let view = UIView()
+        return view
+    }()
+    
+    private var isDoneView: UIView = {
+       let view = UIView()
+        return view
+    }()
 
     
     override init(frame: CGRect) {
@@ -22,8 +37,8 @@ final class TDCell: UICollectionViewCell {
     }
 
     
-    func configureCell() {
-        
+    func configureCell(with text: String) {
+        self.textLabel.text = text
     }
 }
 
@@ -32,12 +47,17 @@ final class TDCell: UICollectionViewCell {
 extension TDCell {
     
     private func setupCell() {
-        
         backgroundColor = .white.withAlphaComponent(0.15)
+        layer.cornerRadius = 16
         makeShadow(opacity: 0.3)
+        
+        [textLabel, priorityView, isDoneView].forEach { addNewSubbview($0) }
     }
     
     private func setupLayout() {
-
+        textLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().offset(frame.width / 10)
+        }
     }
 }
