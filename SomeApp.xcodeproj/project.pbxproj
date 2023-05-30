@@ -17,6 +17,7 @@
 		3DB45BF92A25374E00999750 /* TDTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45BF82A25374E00999750 /* TDTask.swift */; };
 		3DB45BFB2A25434B00999750 /* ModeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45BFA2A25434B00999750 /* ModeSelectionView.swift */; };
 		3DB45BFE2A25460A00999750 /* ModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45BFD2A25460A00999750 /* ModeView.swift */; };
+		3DB45C002A267C4B00999750 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45BFF2A267C4B00999750 /* UIFont+Extension.swift */; };
 		3DCC8B0B2A1E118800204A82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0A2A1E118800204A82 /* AppDelegate.swift */; };
 		3DCC8B0D2A1E118800204A82 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0C2A1E118800204A82 /* SceneDelegate.swift */; };
 		3DCC8B0F2A1E118800204A82 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0E2A1E118800204A82 /* WelcomeViewController.swift */; };
@@ -34,6 +35,7 @@
 		3DB45BF82A25374E00999750 /* TDTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDTask.swift; sourceTree = "<group>"; };
 		3DB45BFA2A25434B00999750 /* ModeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectionView.swift; sourceTree = "<group>"; };
 		3DB45BFD2A25460A00999750 /* ModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeView.swift; sourceTree = "<group>"; };
+		3DB45BFF2A267C4B00999750 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		3DCC8B072A1E118800204A82 /* SomeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DCC8B0A2A1E118800204A82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DCC8B0C2A1E118800204A82 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				3D6E6AAD2A1E92470072A9C4 /* UIView+Extension.swift */,
+				3DB45BFF2A267C4B00999750 /* UIFont+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				3D6E6AA52A1E902E0072A9C4 /* BaseController.swift in Sources */,
 				3DB45BF42A213B5100999750 /* Resources.swift in Sources */,
 				3D68C0A82A1FC4C6005BB354 /* TDViewController.swift in Sources */,
+				3DB45C002A267C4B00999750 /* UIFont+Extension.swift in Sources */,
 				3DB45BF92A25374E00999750 /* TDTask.swift in Sources */,
 				3DCC8B0D2A1E118800204A82 /* SceneDelegate.swift in Sources */,
 			);

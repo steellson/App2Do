@@ -12,6 +12,7 @@ final class TDViewController: BaseController {
     private let greatingTitle: UILabel = {
         let label = UILabel()
         label.text = "Hey bro!"
+        label.font = .chalkboard28
         label.textColor = R.Colors.specialLimeColor
         return label
     }()
@@ -19,6 +20,7 @@ final class TDViewController: BaseController {
     private let greatingSubtitle: UILabel = {
         let label = UILabel()
         label.text = "Are u ready for hardworking today? :)"
+        label.font = .chalkboard16
         label.textColor = R.Colors.specialWhiteColor
         return label
     }()
@@ -26,12 +28,16 @@ final class TDViewController: BaseController {
     private let searchView: UIView = {
         let search = UIView()
         search.backgroundColor = R.Colors.specialPinkColor
+        search.makeBorder(of: 2)
+        search.layer.cornerRadius = 12
+        search.makeShadow()
         return search
     }()
     
     private let dateLable: UILabel = {
         let label = UILabel()
         label.text = "17th April"
+        label.font = .chalkboard28
         label.textColor = R.Colors.specialLimeColor
         return label
     }()
@@ -41,26 +47,27 @@ final class TDViewController: BaseController {
     private let todayTasksLable: UILabel = {
         let label = UILabel()
         label.text = "Today tasks"
+        label.font = .chalkboard24
         label.textColor = R.Colors.specialWhiteColor
         return label
     }()
     
     private let addButton: UIButton = {
         let button = UIButton()
-        button.layer.cornerRadius = 14
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 1
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 10
+        button.makeBorder(of: 2)
         button.backgroundColor = R.Colors.specialLimeColor
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.tintColor = .black
+        button.titleLabel?.font = .chalkboard28
         return button
     }()
     
     private let calendarButton: UIButton = {
         let button = UIButton()
-        button.layer.cornerRadius = 14
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 10
+        button.backgroundColor = R.Colors.deepGrayBackgroundColor
+        button.makeBorder(of: 2)
         button.setTitle("Cal", for: .normal)
         return button
     }()
@@ -72,9 +79,10 @@ final class TDViewController: BaseController {
     private func setupTDCollectionView() {
         let tdLayout = UICollectionViewFlowLayout()
         tdLayout.scrollDirection = .vertical
+        tdLayout.minimumLineSpacing = 30
         
         tdCollectionView = UICollectionView(frame: .zero, collectionViewLayout: tdLayout)
-        tdCollectionView.makeShadow(opacity: 0.8)
+        tdCollectionView.makeShadow()
         tdCollectionView.layer.cornerRadius = 10
         tdCollectionView.backgroundColor = .clear
         tdCollectionView.register(TDCell.self, forCellWithReuseIdentifier: "TDCell")
@@ -102,9 +110,9 @@ extension TDViewController {
 
     override func setupLayout() {
         super.setupLayout()
-        
+                
         greatingTitle.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaInsets.top).offset(60)
+            $0.top.equalTo(view.safeAreaInsets.top).offset(50)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
         }
@@ -116,44 +124,44 @@ extension TDViewController {
         }
         
         searchView.snp.makeConstraints {
-            $0.top.equalTo(greatingSubtitle.snp.bottom).offset(20)
+            $0.top.equalTo(greatingSubtitle.snp.bottom).offset(25)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(60)
         }
         
         dateLable.snp.makeConstraints {
-            $0.top.equalTo(searchView.snp.bottom).offset(30)
+            $0.top.equalTo(searchView.snp.bottom).offset(25)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
         }
         
         modeSelectionView.snp.makeConstraints {
-            $0.top.equalTo(dateLable.snp.bottom).offset(20)
+            $0.top.equalTo(dateLable.snp.bottom).offset(10)
             $0.leading.equalToSuperview().offset(20)
             $0.width.equalTo(view.frame.width * 0.75)
             $0.height.equalTo(40)
         }
         
         todayTasksLable.snp.makeConstraints {
-            $0.top.equalTo(modeSelectionView.snp.bottom).offset(10)
+            $0.top.equalTo(modeSelectionView.snp.bottom).offset(25)
             $0.leading.equalToSuperview().offset(20)
         }
         
         calendarButton.snp.makeConstraints {
-            $0.centerY.equalTo(todayTasksLable.snp.centerY)
+            $0.top.equalTo(modeSelectionView.snp.bottom).offset(20)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.height.width.equalTo(40)
+            $0.height.width.equalTo(45)
         }
         
         addButton.snp.makeConstraints {
-            $0.centerY.equalTo(todayTasksLable.snp.centerY)
-            $0.trailing.equalTo(calendarButton.snp.leading).offset(-10)
-            $0.height.width.equalTo(40)
+            $0.top.equalTo(modeSelectionView.snp.bottom).offset(20)
+            $0.trailing.equalTo(calendarButton.snp.leading).offset(-20)
+            $0.height.width.equalTo(45)
         }
                 
         tdCollectionView.snp.makeConstraints {
-            $0.top.equalTo(todayTasksLable.snp.bottom).offset(20)
+            $0.top.equalTo(addButton.snp.bottom).offset(25)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }

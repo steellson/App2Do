@@ -16,7 +16,7 @@ final class WelcomeViewController: BaseController {
         startButton.backgroundColor = R.Colors.specialLimeColor
         startButton.layer.cornerRadius = 12
         startButton.makeBorder(of: 0.3)
-        startButton.makeShadow(opacity: 1)
+        startButton.makeShadow()
         
         startButton.addTarget(self, action: #selector(startButtonTarget), for: .touchUpInside)
     }

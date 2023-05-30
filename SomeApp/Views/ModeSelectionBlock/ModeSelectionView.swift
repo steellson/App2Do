@@ -9,19 +9,18 @@ import SnapKit
 
 final class ModeSelectionView: BaseView {
     
-    private let modes = ["today", "pending", "completed"]
+    private let modes = ["today", "pending", "done"]
     private var hStack = UIStackView()
     
     private func setupHStack() {
         modes.forEach {
             let modeView = ModeView()
             modeView.configureTitle(with: $0)
-            
             hStack.addArrangedSubview(modeView)
         }
-        
+        hStack.arrangedSubviews.first?.backgroundColor = R.Colors.specialBlueColor
         hStack.distribution = .fillEqually
-        hStack.spacing = 5
+        hStack.spacing = 10
     }
 }
 

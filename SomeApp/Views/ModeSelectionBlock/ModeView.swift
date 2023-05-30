@@ -11,6 +11,8 @@ final class ModeView: BaseView {
     
     private let title: UILabel = {
         let title = UILabel()
+        title.font = .chalkboard18
+        title.textColor = R.Colors.specialWhiteColor
         return title
     }()
     
@@ -29,11 +31,10 @@ extension ModeView {
         
         addNewSubbview(title)
 
-        layer.cornerRadius = 14
-        layer.borderColor = UIColor.white.cgColor
-        layer.borderWidth = 1
+        backgroundColor = R.Colors.deepGrayBackgroundColor
+        layer.cornerRadius = 10
         
-        makeShadow(opacity: 1)
+        makeBorder(of: 2)
     }
     
     override func setupLayout() {
