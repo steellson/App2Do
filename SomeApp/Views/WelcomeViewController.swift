@@ -13,7 +13,7 @@ final class WelcomeViewController: BaseController {
     
     private func setupStartButton() {
         startButton.setTitle(R.Strings.startButtonTitle.rawValue, for: .normal)
-        startButton.backgroundColor = R.Colors.alphaColor
+        startButton.backgroundColor = R.Colors.specialLimeColor
         startButton.layer.cornerRadius = 12
         startButton.makeBorder(of: 0.3)
         startButton.makeShadow(opacity: 1)

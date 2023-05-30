@@ -19,8 +19,10 @@ final class ModeSelectionView: BaseView {
             
             hStack.addArrangedSubview(modeView)
         }
+        
+        hStack.distribution = .fillEqually
+        hStack.spacing = 5
     }
-
 }
 
 //MARK: - ModeSelectionView Extension
@@ -33,6 +35,7 @@ extension ModeSelectionView {
         backgroundColor = .clear
         
         addNewSubbview(hStack)
+        setupHStack()
     }
     
     override func setupLayout() {

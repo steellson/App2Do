@@ -30,6 +30,9 @@ extension ModeView {
         addNewSubbview(title)
 
         layer.cornerRadius = 14
+        layer.borderColor = UIColor.white.cgColor
+        layer.borderWidth = 1
+        
         makeShadow(opacity: 1)
     }
     
@@ -38,7 +41,6 @@ extension ModeView {
         
         title.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().offset(6)
         }
     }
 }
