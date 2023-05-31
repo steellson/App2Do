@@ -25,14 +25,7 @@ final class TDViewController: BaseController {
         return label
     }()
     
-    private let searchView: UIView = {
-        let search = UIView()
-        search.backgroundColor = R.Colors.specialPinkColor
-        search.makeBorder(of: 2)
-        search.layer.cornerRadius = 12
-        search.makeShadow()
-        return search
-    }()
+    private let searchView = SearchView()
     
     private let dateLable: UILabel = {
         let label = UILabel()

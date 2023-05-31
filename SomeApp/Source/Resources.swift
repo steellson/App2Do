@@ -19,6 +19,11 @@ enum R {
     
     enum Strings: String {
         case startButtonTitle = "Go!"
+        case searchViewPlaceholder = "Type here ..."
     }
     
+    enum Images {
+        static let searchViewImage = UIImage(systemName: "magnifyingglass")
+        static let isDoneMarkImage = UIImage(systemName: "checkmark")
+    }
 }

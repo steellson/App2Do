@@ -21,12 +21,7 @@ final class TDCell: UICollectionViewCell {
         return view
     }()
     
-    private var isDoneView: UIView = {
-        let view = UIView()
-        view.makeBorder(of: 1)
-        view.layer.cornerRadius = 6
-        return view
-    }()
+    private var isDoneView = IsDoneView()
     
     
     override init(frame: CGRect) {

@@ -9,6 +9,8 @@ import SnapKit
 
 final class ModeView: BaseView {
     
+    private var selectGestureRecognizer: UITapGestureRecognizer!
+    
     private let title: UILabel = {
         let title = UILabel()
         title.font = .chalkboard18
@@ -20,6 +22,14 @@ final class ModeView: BaseView {
         self.title.text = text
     }
 
+    private func setupTapGestureRecognizer() {
+        selectGestureRecognizer = UITapGestureRecognizer()
+        selectGestureRecognizer.addTarget(self, action: #selector(tapGestureAction))
+    }
+    
+    @objc private func tapGestureAction() {
+        backgroundColor = R.Colors.specialBlueColor
+    }
 }
 
 //MARK: - ModeView Extension
@@ -29,11 +39,12 @@ extension ModeView {
     override func setupView() {
         super.setupView()
         
-        addNewSubbview(title)
+        setupTapGestureRecognizer()
 
-        backgroundColor = R.Colors.deepGrayBackgroundColor
-        layer.cornerRadius = 10
+        addNewSubbview(title)
+        addGestureRecognizer(selectGestureRecognizer)
         
+        layer.cornerRadius = 10
         makeBorder(of: 2)
     }
     

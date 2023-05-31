@@ -18,7 +18,6 @@ final class ModeSelectionView: BaseView {
             modeView.configureTitle(with: $0)
             hStack.addArrangedSubview(modeView)
         }
-        hStack.arrangedSubviews.first?.backgroundColor = R.Colors.specialBlueColor
         hStack.distribution = .fillEqually
         hStack.spacing = 10
     }
