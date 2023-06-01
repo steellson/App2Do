@@ -23,6 +23,7 @@ enum R {
         case nameFieldPlaceholder = "Here..."
         case startButtonTitle = "Go!"
         case searchViewPlaceholder = "Type here ..."
+        case tdCellReuseIdentifier = "TDCell"
     }
     
     enum Images {

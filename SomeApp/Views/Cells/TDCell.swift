@@ -9,6 +9,8 @@ import SnapKit
 
 final class TDCell: UICollectionViewCell {
     
+    static let cellId = R.Strings.tdCellReuseIdentifier.rawValue
+    
     private var textLabel: UILabel = {
         let label = UILabel()
         label.font = .chalkboard18
@@ -16,17 +18,12 @@ final class TDCell: UICollectionViewCell {
         return label
     }()
     
-    private var priorityView: UIView = {
-        let view = UIView()
-        return view
-    }()
-    
-    private var isDoneView = IsDoneView()
+    private var isDoneView = IsDoneView(isDone: false)
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         setupCell()
         setupLayout()
     }
@@ -36,10 +33,12 @@ final class TDCell: UICollectionViewCell {
     }
     
     
-    func configureCell(with text: String) {
+    func configureCell(with text: String, isDone: Bool) {
         self.textLabel.text = text
+        self.isDoneView.makeState(isDone)
     }
 }
+
 
 //MARK: - TDCell Extension
 
@@ -49,8 +48,8 @@ extension TDCell {
         backgroundColor = R.Colors.deepGrayBackgroundColor
         layer.cornerRadius = 18
         makeBorder(of: 2)
-        
-        [textLabel, priorityView, isDoneView].forEach { addNewSubbview($0) }
+
+        [textLabel, isDoneView].forEach { addNewSubbview($0) }
     }
     
     private func setupLayout() {

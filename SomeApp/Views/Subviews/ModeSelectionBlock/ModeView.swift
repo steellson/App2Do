@@ -17,6 +17,11 @@ final class ModeView: BaseView {
         title.textColor = R.Colors.specialWhiteColor
         return title
     }()
+
+    var isSelected = false
+    
+    
+    // Setup
     
     func configureTitle(with text: String) {
         self.title.text = text
@@ -27,8 +32,19 @@ final class ModeView: BaseView {
         selectGestureRecognizer.addTarget(self, action: #selector(tapGestureAction))
     }
     
+    private func changeBackgroundColor(on color: UIColor) {
+        isSelected.toggle()
+
+        switch isSelected {
+        case true:
+            backgroundColor = R.Colors.specialBlueColor
+        case false:
+            backgroundColor = R.Colors.deepGrayBackgroundColor
+        }
+    }
+    
     @objc private func tapGestureAction() {
-        backgroundColor = R.Colors.specialBlueColor
+        changeBackgroundColor(on: R.Colors.specialBlueColor)
     }
 }
 

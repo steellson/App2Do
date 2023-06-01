@@ -46,7 +46,7 @@ final class TDViewController: BaseController {
     }()
     
     private let addButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.layer.cornerRadius = 10
         button.makeBorder(of: 2)
         button.backgroundColor = R.Colors.specialLimeColor
@@ -57,7 +57,7 @@ final class TDViewController: BaseController {
     }()
     
     private let calendarButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.layer.cornerRadius = 10
         button.backgroundColor = R.Colors.deepGrayBackgroundColor
         button.makeBorder(of: 2)
@@ -67,16 +67,17 @@ final class TDViewController: BaseController {
     
     private var tdCollectionView: UICollectionView!
     
-    private let tdTasksData = TDData().tasks
+    private var tdTasksData = TDData().tasks
     
     
     // Setup Controller
     
     init(userName: String) {
         super.init(nibName: nil, bundle: nil)
-        
-        self.greatingTitle.text = "Hey, \(userName.capitalized)!"
         setupTDCollectionView()
+
+        let currentName = userName == "" ? "bro" : userName
+        self.greatingTitle.text = "Hey, \(currentName.capitalized)!"
     }
     
     required init?(coder: NSCoder) {
@@ -92,8 +93,9 @@ final class TDViewController: BaseController {
         tdCollectionView = UICollectionView(frame: .zero, collectionViewLayout: tdLayout)
         tdCollectionView.makeShadow()
         tdCollectionView.layer.cornerRadius = 10
-        tdCollectionView.backgroundColor = .clear
-        tdCollectionView.register(TDCell.self, forCellWithReuseIdentifier: "TDCell")
+        tdCollectionView.showsVerticalScrollIndicator = false
+        tdCollectionView.backgroundColor = R.Colors.deepGrayBackgroundColor
+        tdCollectionView.register(TDCell.self, forCellWithReuseIdentifier: TDCell.cellId)
         tdCollectionView.dataSource = self
         tdCollectionView.delegate = self
     }
@@ -182,21 +184,26 @@ extension TDViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let tdCell = collectionView.dequeueReusableCell(withReuseIdentifier: "TDCell", for: indexPath) as? TDCell else { return UICollectionViewCell() }
-        
-        let tasksText = tdTasksData[indexPath.item].text
-        tdCell.configureCell(with: tasksText)
-        
+        guard let tdCell = collectionView.dequeueReusableCell(withReuseIdentifier: TDCell.cellId,
+                                                              for: indexPath) as? TDCell else { return UICollectionViewCell() }
+        let task = tdTasksData[indexPath.item]        
+        tdCell.configureCell(with: task.text, isDone: task.isDone)
         return tdCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print("aaaa")
+
+        collectionView.reloadData()
     }
 }
 
 extension TDViewController: UICollectionViewDelegateFlowLayout {
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         .init(width: view.bounds.width - 40, height: view.bounds.height / 8)
     }
 }
-
 
 /*
 //MARK: - TDViewControllerViewProtocol Extension

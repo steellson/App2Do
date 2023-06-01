@@ -17,21 +17,39 @@ final class IsDoneView: BaseView {
         return view
     }()
     
-    public enum State {
-        case ready
-        case isNotReady
-    }
-    
-        
-    func configure(with state: IsDoneView.State) {
-        switch state {
-        case .ready:
-            backgroundColor = R.Colors.specialBlueColor
-            isDoneMark.isHidden = false
-        case .isNotReady:
-            backgroundColor = R.Colors.deepGrayBackgroundColor
+    private var isDone: Bool {
+        didSet {
+            if self.isDone {
+                backgroundColor = R.Colors.specialBlueColor
+                isDoneMark.isHidden = false
+            } else {
+                backgroundColor = R.Colors.deepGrayBackgroundColor
+                isDoneMark.isHidden = true
+            }
         }
     }
+    
+    init(isDone: Bool) {
+        self.isDone = isDone
+        super.init(frame: .zero)
+
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // External manage methods
+    
+    func makeState(_ isDone: Bool) {
+        self.isDone = isDone
+    }
+    
+    func stateToggle() {
+        self.isDone.toggle()
+    }
+    
 }
 
 //MARK: - IsDoneView Extension
