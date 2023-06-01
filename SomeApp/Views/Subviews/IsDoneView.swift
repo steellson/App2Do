@@ -69,8 +69,7 @@ extension IsDoneView {
         super.setupLayout()
         
         isDoneMark.snp.makeConstraints {
-            $0.centerX.centerY.equalToSuperview()
-            $0.width.height.equalTo(30)
+            $0.edges.equalToSuperview().inset(5)
         }
     }
 }

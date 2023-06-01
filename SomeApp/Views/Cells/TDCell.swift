@@ -57,13 +57,13 @@ extension TDCell {
         let sideOffset = frame.width / 10
         
         isDoneView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(sideOffset * 0.5)
             $0.width.height.equalTo(50)
         }
         
         textLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(sideOffset)
             $0.trailing.equalTo(isDoneView.snp.leading).offset(sideOffset)
         }
