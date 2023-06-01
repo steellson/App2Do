@@ -41,7 +41,7 @@ final class TextField: UITextField {
     }
     
     private func setupPlaceholderAppereance() {
-        let attributedString = NSAttributedString(string: "Email", attributes: [
+        let attributedString = NSAttributedString(string: "", attributes: [
             .foregroundColor: R.Colors.shadowGrayColor,
             .font: UIFont.chalkboard16!
         ])

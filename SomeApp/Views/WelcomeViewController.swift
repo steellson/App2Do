@@ -100,9 +100,10 @@ extension WelcomeViewController {
 private extension WelcomeViewController {
     
     @objc func startButtonTarget() {
-        let tdController = TDViewController()
+        let name = nameField.text ?? "bro"
+        let tdController = TDViewController(userName: name)
         tdController.modalPresentationStyle = .fullScreen
-        
+
         self.present(tdController, animated: true)
     }
 }

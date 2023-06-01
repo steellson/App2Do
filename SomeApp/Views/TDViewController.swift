@@ -11,7 +11,7 @@ final class TDViewController: BaseController {
     
     private let greatingTitle: UILabel = {
         let label = UILabel()
-        label.text = "Hey bro!"
+        label.text = "Hey"
         label.font = .chalkboard28
         label.textColor = R.Colors.specialLimeColor
         return label
@@ -69,6 +69,21 @@ final class TDViewController: BaseController {
     
     private let tdTasksData = TDData().tasks
     
+    
+    // Setup Controller
+    
+    init(userName: String) {
+        super.init(nibName: nil, bundle: nil)
+        
+        self.greatingTitle.text = "Hey, \(userName.capitalized)!"
+        setupTDCollectionView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     private func setupTDCollectionView() {
         let tdLayout = UICollectionViewFlowLayout()
         tdLayout.scrollDirection = .vertical
@@ -91,10 +106,7 @@ extension TDViewController {
     
     override func setupView() {
         super.setupView()
-        
-        setupTDCollectionView()
-        
-        // Add subbviews
+                
         [
             greatingTitle, greatingSubtitle, searchView, dateLable,
             modeSelectionView, addButton, calendarButton, todayTasksLable, tdCollectionView
