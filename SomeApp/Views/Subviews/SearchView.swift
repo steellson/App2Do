@@ -27,16 +27,7 @@ final class SearchView: BaseView {
         return button
     }()
     
-    private let searchTextField: UITextField = {
-        let field = UITextField()
-        field.textColor = R.Colors.specialWhiteColor
-        field.tintColor = R.Colors.specialWhiteColor
-        field.placeholder = R.Strings.searchViewPlaceholder.rawValue
-        field.font = .chalkboard18
-        field.keyboardAppearance = .dark
-        field.returnKeyType = .search
-        return field
-    }()
+    private let searchTextField = TextField()
 }
 
 //MARK: - SearchView Extension

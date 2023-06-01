@@ -18,11 +18,15 @@ enum R {
     }
     
     enum Strings: String {
+        case greetingLabelText = "Hi dude!"
+        case nameLabelText = "Write your name down:"
+        case nameFieldPlaceholder = "Here..."
         case startButtonTitle = "Go!"
         case searchViewPlaceholder = "Type here ..."
     }
     
     enum Images {
+        static let textFieldSpacer = UIImage(systemName: "arrow.right.to.line")
         static let searchViewImage = UIImage(systemName: "magnifyingglass")
         static let isDoneMarkImage = UIImage(systemName: "checkmark")
     }
