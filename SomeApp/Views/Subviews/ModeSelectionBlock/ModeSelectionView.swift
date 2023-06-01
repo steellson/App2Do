@@ -20,10 +20,6 @@ final class ModeSelectionView: BaseView {
         }
         hStack.distribution = .fillEqually
         hStack.spacing = 10
-
-        // First mode start selection
-        guard let selectedModeView = hStack.arrangedSubviews[0] as? ModeView else { return }
-        selectedModeView.isSelected = true
     }
 }
 
@@ -35,8 +31,8 @@ extension ModeSelectionView {
         super.setupView()
         backgroundColor = .clear
         
-        addNewSubbview(hStack)
         setupHStack()
+        addNewSubbview(hStack)
     }
     
     override func setupLayout() {

@@ -37,6 +37,10 @@ final class TDCell: UICollectionViewCell {
         self.textLabel.text = text
         self.isDoneView.makeState(isDone)
     }
+    
+    func switchState() {
+        self.isDoneView.stateToggle()
+    }
 }
 
 

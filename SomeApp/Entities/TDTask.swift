@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct TDTask {
+struct TDTask: Identifiable {
     
+    let id: String = UUID().uuidString
     let text: String
     let time: Date?
     var priority: Int?

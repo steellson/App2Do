@@ -49,7 +49,6 @@ final class IsDoneView: BaseView {
     func stateToggle() {
         self.isDone.toggle()
     }
-    
 }
 
 //MARK: - IsDoneView Extension

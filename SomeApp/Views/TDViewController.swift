@@ -190,18 +190,19 @@ extension TDViewController: UICollectionViewDataSource {
         tdCell.configureCell(with: task.text, isDone: task.isDone)
         return tdCell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        print("aaaa")
-
-        collectionView.reloadData()
-    }
 }
 
 extension TDViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         .init(width: view.bounds.width - 40, height: view.bounds.height / 8)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? TDCell else { return }
+//        cell.switchState()
+//        collectionView.reloadData()
+        print(cell.description)
     }
 }
 
