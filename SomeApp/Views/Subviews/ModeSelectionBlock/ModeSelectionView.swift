@@ -9,17 +9,23 @@ import SnapKit
 
 final class ModeSelectionView: BaseView {
     
-    private let modes = ["today", "pending", "done"]
+    private let modes = [
+        Mode(name: "today", isOn: true),
+        Mode(name: "pending", isOn: false),
+        Mode(name: "done", isOn: false)
+    ]
+    
     private var hStack = UIStackView()
     
     private func setupHStack() {
-        modes.forEach {
-            let modeView = ModeView()
-            modeView.configureTitle(with: $0)
-            hStack.addArrangedSubview(modeView)
-        }
         hStack.distribution = .fillEqually
         hStack.spacing = 10
+
+        modes.forEach {
+            let modeView = ModeView()
+            modeView.configureTitle(with: $0.name, $0.isOn)
+            hStack.addArrangedSubview(modeView)
+        }
     }
 }
 

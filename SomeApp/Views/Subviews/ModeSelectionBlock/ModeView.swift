@@ -18,13 +18,33 @@ final class ModeView: BaseView {
         return title
     }()
 
-    var isSelected = false
+    var isPressed: Bool {
+        didSet {
+            if self.isPressed {
+                backgroundColor = R.Colors.specialBlueColor
+            } else {
+                backgroundColor = R.Colors.deepGrayBackgroundColor
+            }
+        }
+    }
     
+    init() {
+        self.isPressed = false
+        super.init(frame: .zero)
+        
+        layer.cornerRadius = 10
+        makeBorder(of: 2)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // Setup
     
-    func configureTitle(with text: String) {
+    func configureTitle(with text: String, _ state: Bool) {
         self.title.text = text
+        self.isPressed = state
     }
 
     private func setupTapGestureRecognizer() {
@@ -32,19 +52,8 @@ final class ModeView: BaseView {
         selectGestureRecognizer.addTarget(self, action: #selector(tapGestureAction))
     }
     
-    private func changeBackgroundColor(on color: UIColor) {
-        isSelected.toggle()
-
-        switch isSelected {
-        case true:
-            backgroundColor = R.Colors.specialBlueColor
-        case false:
-            backgroundColor = R.Colors.deepGrayBackgroundColor
-        }
-    }
-    
     @objc private func tapGestureAction() {
-        changeBackgroundColor(on: R.Colors.specialBlueColor)
+        self.isPressed.toggle()
     }
 }
 
@@ -54,14 +63,10 @@ extension ModeView {
     
     override func setupView() {
         super.setupView()
-        
         setupTapGestureRecognizer()
 
         addNewSubbview(title)
         addGestureRecognizer(selectGestureRecognizer)
-        
-        layer.cornerRadius = 10
-        makeBorder(of: 2)
     }
     
     override func setupLayout() {

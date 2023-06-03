@@ -11,7 +11,7 @@ final class WelcomeViewController: BaseController {
     
     private let greetingLabel: UILabel = {
         let label = UILabel()
-        label.text = R.Strings.greetingLabelText.rawValue
+        label.text = R.Strings.greetingLabel.rawValue
         label.textColor = R.Colors.specialLimeColor
         label.font = .chalkboard28
         label.textAlignment = .left

@@ -18,11 +18,16 @@ enum R {
     }
     
     enum Strings: String {
-        case greetingLabelText = "Hi dude!"
+        case greetingLabel = "Hi dude!"
         case nameLabelText = "Write your name down:"
         case nameFieldPlaceholder = "Here..."
         case startButtonTitle = "Go!"
+        
+        case greatingLabelTD = "Hey, "
+        case greatingSubtitleText = "Are u ready for hardworking today? :)"
         case searchViewPlaceholder = "Type here ..."
+        case todayTasksLabel = "Today tasks"
+        
         case tdCellReuseIdentifier = "TDCell"
     }
     
@@ -30,5 +35,7 @@ enum R {
         static let textFieldSpacer = UIImage(systemName: "arrow.right.to.line")
         static let searchViewImage = UIImage(systemName: "magnifyingglass")
         static let isDoneMarkImage = UIImage(systemName: "checkmark")
+        static let addTaskButtonImage = UIImage(systemName: "plus")
+        static let calendarButtonImage = UIImage(systemName: "calendar")
     }
 }

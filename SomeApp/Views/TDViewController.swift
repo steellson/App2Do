@@ -11,7 +11,7 @@ final class TDViewController: BaseController {
     
     private let greatingTitle: UILabel = {
         let label = UILabel()
-        label.text = "Hey"
+        label.text = R.Strings.greatingLabelTD.rawValue
         label.font = .chalkboard28
         label.textColor = R.Colors.specialLimeColor
         return label
@@ -19,7 +19,7 @@ final class TDViewController: BaseController {
     
     private let greatingSubtitle: UILabel = {
         let label = UILabel()
-        label.text = "Are u ready for hardworking today? :)"
+        label.text = R.Strings.greatingSubtitleText.rawValue
         label.font = .chalkboard16
         label.textColor = R.Colors.specialWhiteColor
         return label
@@ -39,7 +39,7 @@ final class TDViewController: BaseController {
     
     private let todayTasksLable: UILabel = {
         let label = UILabel()
-        label.text = "Today tasks"
+        label.text = R.Strings.todayTasksLabel.rawValue
         label.font = .chalkboard24
         label.textColor = R.Colors.specialWhiteColor
         return label
@@ -50,7 +50,7 @@ final class TDViewController: BaseController {
         button.layer.cornerRadius = 10
         button.makeBorder(of: 2)
         button.backgroundColor = R.Colors.specialLimeColor
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.setImage(R.Images.addTaskButtonImage, for: .normal)
         button.tintColor = .black
         button.titleLabel?.font = .chalkboard28
         return button
@@ -59,9 +59,10 @@ final class TDViewController: BaseController {
     private let calendarButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 10
-        button.backgroundColor = R.Colors.deepGrayBackgroundColor
+        button.backgroundColor = R.Colors.shadowGrayColor
         button.makeBorder(of: 2)
-        button.setTitle("Cal", for: .normal)
+        button.setImage(R.Images.calendarButtonImage, for: .normal)
+        button.tintColor = .black
         return button
     }()
     
@@ -81,7 +82,7 @@ final class TDViewController: BaseController {
         taskManager.createTask(with: "Working", time: nil, priority: nil, isDone: false)
 
         let currentName = userName == "" ? "bro" : userName
-        self.greatingTitle.text = "Hey, \(currentName.capitalized)!"
+        self.greatingTitle.text = R.Strings.greatingLabelTD.rawValue + currentName.capitalized + "!"
     }
     
     required init?(coder: NSCoder) {
