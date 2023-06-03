@@ -10,6 +10,8 @@ protocol TaskProtocol: AnyObject {
     var time: String? { get set }
     var priority: Int? { get set }
     var isDone: Bool { get set }
+    
+    func switchState()
 }
 
 final class Task: TaskProtocol {
@@ -30,5 +32,7 @@ final class Task: TaskProtocol {
         self.isDone = isDone
     }
         
-
+    func switchState() {
+        self.isDone.toggle()
+    }
 }

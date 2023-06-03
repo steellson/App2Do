@@ -74,7 +74,6 @@ final class TDViewController: BaseController {
     
     init(userName: String) {
         super.init(nibName: nil, bundle: nil)
-        setupTDCollectionView()
         
         taskManager.createTask(with: "Waking up", time: nil, priority: nil, isDone: true)
         taskManager.createTask(with: "Going eat", time: nil, priority: nil, isDone: true)
@@ -94,7 +93,8 @@ final class TDViewController: BaseController {
         let tdLayout = UICollectionViewFlowLayout()
         tdLayout.scrollDirection = .vertical
         tdLayout.minimumLineSpacing = 30
-        
+        tdLayout.itemSize = .init(width: view.bounds.width - 40, height: view.bounds.height / 8)
+
         tdCollectionView = UICollectionView(frame: .zero, collectionViewLayout: tdLayout)
         tdCollectionView.makeShadow()
         tdCollectionView.layer.cornerRadius = 10
@@ -113,6 +113,7 @@ extension TDViewController {
     
     override func setupView() {
         super.setupView()
+        setupTDCollectionView()
         [
             greatingTitle, greatingSubtitle, searchView, dateLable,
             modeSelectionView, addButton, calendarButton, todayTasksLable, tdCollectionView
@@ -196,19 +197,12 @@ extension TDViewController: UICollectionViewDataSource {
     }
 }
 
-extension TDViewController: UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        .init(width: view.bounds.width - 40, height: view.bounds.height / 8)
-    }
+extension TDViewController: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? TDCell else { return }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let task = taskManager.tasks[indexPath.item]
-        task.isDone.toggle()
-        cell.switchState()
+        task.switchState()
         collectionView.reloadData()
-        print(cell.description)
     }
 }
 

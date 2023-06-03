@@ -44,9 +44,9 @@ final class TDCell: UICollectionViewCell {
             }
         }
     }
-    
+
     override init(frame: CGRect) {
-        isDone = false
+        self.isDone = false
         super.init(frame: frame)
         
         setupCell()
@@ -61,10 +61,6 @@ final class TDCell: UICollectionViewCell {
     func configureCell(with text: String, isDone: Bool) {
         self.textLabel.text = text
         self.isDone = isDone
-    }
-    
-    func switchState() {
-        isDone.toggle()
     }
 }
 
