@@ -18,12 +18,37 @@ final class TDCell: UICollectionViewCell {
         return label
     }()
     
-    private var isDoneView = IsDoneView(isDone: false)
+    private let checkmarkView: UIView = {
+        let view = UIView()
+        view.makeBorder(of: 1)
+        view.layer.cornerRadius = 6
+        view.backgroundColor = R.Colors.deepGrayBackgroundColor
+        return view
+    }()
     
+    private var checkmark: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = R.Images.isDoneMarkImage
+        imageView.tintColor = R.Colors.specialWhiteColor
+        return imageView
+    }()
+    
+    private var isDone: Bool {
+        didSet {
+            if self.isDone {
+                checkmarkView.backgroundColor = R.Colors.specialBlueColor
+                checkmark.isHidden = false
+            } else {
+                checkmarkView.backgroundColor = R.Colors.deepGrayBackgroundColor
+                checkmark.isHidden = true
+            }
+        }
+    }
     
     override init(frame: CGRect) {
+        isDone = false
         super.init(frame: frame)
-
+        
         setupCell()
         setupLayout()
     }
@@ -35,11 +60,11 @@ final class TDCell: UICollectionViewCell {
     
     func configureCell(with text: String, isDone: Bool) {
         self.textLabel.text = text
-        self.isDoneView.makeState(isDone)
+        self.isDone = isDone
     }
     
     func switchState() {
-        self.isDoneView.stateToggle()
+        isDone.toggle()
     }
 }
 
@@ -52,24 +77,29 @@ extension TDCell {
         backgroundColor = R.Colors.deepGrayBackgroundColor
         layer.cornerRadius = 18
         makeBorder(of: 2)
-
-        [textLabel, isDoneView].forEach { addNewSubbview($0) }
+        
+        [textLabel, checkmarkView].forEach { addNewSubbview($0) }
+        checkmarkView.addNewSubbview(checkmark)
     }
     
     private func setupLayout() {
         
         let sideOffset = frame.width / 10
         
-        isDoneView.snp.makeConstraints {
+        checkmarkView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(sideOffset * 0.5)
             $0.width.height.equalTo(50)
         }
         
+        checkmark.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(5)
+        }
+        
         textLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(sideOffset)
-            $0.trailing.equalTo(isDoneView.snp.leading).offset(sideOffset)
+            $0.trailing.equalTo(checkmarkView.snp.leading).offset(sideOffset)
         }
     }
 }

@@ -67,7 +67,7 @@ final class TDViewController: BaseController {
     
     private var tdCollectionView: UICollectionView!
     
-    private var tdTasksData = TDData().tasks
+    private let taskManager: TaskManager = TaskManager()
     
     
     // Setup Controller
@@ -75,6 +75,11 @@ final class TDViewController: BaseController {
     init(userName: String) {
         super.init(nibName: nil, bundle: nil)
         setupTDCollectionView()
+        
+        taskManager.createTask(with: "Waking up", time: nil, priority: nil, isDone: true)
+        taskManager.createTask(with: "Going eat", time: nil, priority: nil, isDone: true)
+        taskManager.createTask(with: "Meet up", time: nil, priority: nil, isDone: false)
+        taskManager.createTask(with: "Working", time: nil, priority: nil, isDone: false)
 
         let currentName = userName == "" ? "bro" : userName
         self.greatingTitle.text = "Hey, \(currentName.capitalized)!"
@@ -108,7 +113,6 @@ extension TDViewController {
     
     override func setupView() {
         super.setupView()
-                
         [
             greatingTitle, greatingSubtitle, searchView, dateLable,
             modeSelectionView, addButton, calendarButton, todayTasksLable, tdCollectionView
@@ -180,13 +184,13 @@ extension TDViewController {
 extension TDViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tdTasksData.count
+        return taskManager.tasks.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let tdCell = collectionView.dequeueReusableCell(withReuseIdentifier: TDCell.cellId,
                                                               for: indexPath) as? TDCell else { return UICollectionViewCell() }
-        let task = tdTasksData[indexPath.item]        
+        let task = taskManager.tasks[indexPath.item]
         tdCell.configureCell(with: task.text, isDone: task.isDone)
         return tdCell
     }
@@ -200,8 +204,10 @@ extension TDViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? TDCell else { return }
-//        cell.switchState()
-//        collectionView.reloadData()
+        let task = taskManager.tasks[indexPath.item]
+        task.isDone.toggle()
+        cell.switchState()
+        collectionView.reloadData()
         print(cell.description)
     }
 }

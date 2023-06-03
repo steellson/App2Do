@@ -7,7 +7,7 @@
 import Foundation
 
 protocol TaskManagerProtocol: AnyObject {
-    func createTask(with text: String, time: Date?, priority: Int?, isDone: Bool)
+    func createTask(with text: String, time: String?, priority: Int?, isDone: Bool)
     func removeTask(by id: String)
     func updateTask()
     func getTaskInfo(by id: String)
@@ -15,18 +15,19 @@ protocol TaskManagerProtocol: AnyObject {
 
 final class TaskManager {
     
-    private var tasks: [TDTask]?
+    var tasks: [Task] = []
 
 }
 
+//MARK: - Task Manager Protocol Extension
 
 extension TaskManager: TaskManagerProtocol {
     
     func createTask(with text: String,
-                    time: Date?,
+                    time: String?,
                     priority: Int?,
                     isDone: Bool) {
-        self.tasks?.append(TDTask(text: text,
+        self.tasks.append(Task(text: text,
                                   time: time,
                                   priority: priority,
                                   isDone: isDone))
