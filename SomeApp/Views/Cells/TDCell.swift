@@ -64,9 +64,7 @@ final class TDCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         imageView.tintColor = R.Colors.deepGrayBackgroundColor
         return imageView
     }()
-    
-    private var editLongGesture: UILongPressGestureRecognizer!
-    
+        
     private var isDone: Bool = false {
         didSet {
             if isDone {
@@ -102,7 +100,7 @@ final class TDCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         
         setupCell()
         setupLayout()
-        setupEditLongGesture()
+        setupGestureRecognizers()
     }
     
     required init?(coder: NSCoder) {
@@ -113,18 +111,6 @@ final class TDCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     func configureCell(with text: String, isDone: Bool) {
         self.textLabel.text = text
         self.isDone = isDone
-    }
-    
-    private func setupEditLongGesture() {
-        editLongGesture = UILongPressGestureRecognizer(target: self,
-                                                   action: #selector(editLongGestureHandler))
-        editLongGesture.minimumPressDuration = 0.7
-        editLongGesture.delegate = self
-        addGestureRecognizer(editLongGesture)
-    }
-
-    @objc private func editLongGestureHandler() {
-        isEditing.toggle()
     }
 }
 
@@ -186,5 +172,37 @@ private extension TDCell {
             $0.leading.equalToSuperview().offset(sideOffset)
             $0.trailing.equalTo(checkmarkView.snp.leading).offset(sideOffset)
         }
+    }
+}
+
+//MARK: - Gestures Extension
+
+private extension TDCell {
+    
+    func setupGestureRecognizers() {
+        let editLongGesture = UILongPressGestureRecognizer(target: self,
+                                                   action: #selector(editLongGestureHandler))
+        editLongGesture.minimumPressDuration = 0.7
+        addGestureRecognizer(editLongGesture)
+        
+        let deleteGesture = UITapGestureRecognizer(target: self,
+                                                   action: #selector(deleteGestureHandler))
+        deleteMarkView.addGestureRecognizer(deleteGesture)
+        
+        let editGesture = UITapGestureRecognizer(target: self,
+                                                   action: #selector(editGestureHandler))
+        editMarkView.addGestureRecognizer(editGesture)
+    }
+    
+    @objc func editLongGestureHandler() {
+        isEditing.toggle()
+    }
+    
+    @objc func deleteGestureHandler() {
+        print("deleted")
+    }
+    
+    @objc func editGestureHandler() {
+        print("edited")
     }
 }

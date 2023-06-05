@@ -204,6 +204,10 @@ extension TDViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let task = taskManager.tasks[indexPath.item]
         task.switchState()
+        
+//        FOR REMOVE
+//        taskManager.tasks.remove(at: indexPath.item)
+        
         collectionView.reloadData()
     }
 }
