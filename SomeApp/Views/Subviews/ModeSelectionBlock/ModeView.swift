@@ -18,28 +18,18 @@ final class ModeView: BaseView {
         return title
     }()
 
-    var isPressed: Bool {
+    var isPressed: Bool = false {
         didSet {
-            if self.isPressed {
+            if isPressed {
                 backgroundColor = R.Colors.specialBlueColor
+                makeBorder(of: 2.5)
             } else {
                 backgroundColor = R.Colors.deepGrayBackgroundColor
+                makeBorder(of: 2, color: R.Colors.shadowGrayColor)
             }
         }
     }
-    
-    init() {
-        self.isPressed = false
-        super.init(frame: .zero)
-        
-        layer.cornerRadius = 10
-        makeBorder(of: 2)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     // Setup
     
     func configureTitle(with text: String, _ state: Bool) {
@@ -63,8 +53,9 @@ extension ModeView {
     
     override func setupView() {
         super.setupView()
+        layer.cornerRadius = 10
+        
         setupTapGestureRecognizer()
-
         addNewSubbview(title)
         addGestureRecognizer(selectGestureRecognizer)
     }

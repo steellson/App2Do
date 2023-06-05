@@ -35,6 +35,8 @@ enum R {
         static let textFieldSpacer = UIImage(systemName: "arrow.right.to.line")
         static let searchViewImage = UIImage(systemName: "magnifyingglass")
         static let isDoneMarkImage = UIImage(systemName: "checkmark")
+        static let deleteMarkImage = UIImage(systemName: "xmark")
+        static let editmarkImage = UIImage(systemName: "pencil")
         static let addTaskButtonImage = UIImage(systemName: "plus")
         static let calendarButtonImage = UIImage(systemName: "calendar")
     }

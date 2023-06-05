@@ -48,7 +48,7 @@ final class TDViewController: BaseController {
     private let addButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 10
-        button.makeBorder(of: 2)
+        button.makeBorder(of: 2, color: R.Colors.shadowGrayColor)
         button.backgroundColor = R.Colors.specialLimeColor
         button.setImage(R.Images.addTaskButtonImage, for: .normal)
         button.tintColor = .black
@@ -59,8 +59,8 @@ final class TDViewController: BaseController {
     private let calendarButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 10
-        button.backgroundColor = R.Colors.shadowGrayColor
-        button.makeBorder(of: 2)
+        button.backgroundColor = R.Colors.specialPinkColor
+        button.makeBorder(of: 2, color: R.Colors.shadowGrayColor)
         button.setImage(R.Images.calendarButtonImage, for: .normal)
         button.tintColor = .black
         return button
@@ -80,7 +80,7 @@ final class TDViewController: BaseController {
         taskManager.createTask(with: "Going eat", time: nil, priority: nil, isDone: true)
         taskManager.createTask(with: "Meet up", time: nil, priority: nil, isDone: false)
         taskManager.createTask(with: "Working", time: nil, priority: nil, isDone: false)
-
+        
         let currentName = userName == "" ? "bro" : userName
         self.greatingTitle.text = R.Strings.greatingLabelTD.rawValue + currentName.capitalized + "!"
     }
@@ -94,7 +94,8 @@ final class TDViewController: BaseController {
         let tdLayout = UICollectionViewFlowLayout()
         tdLayout.scrollDirection = .vertical
         tdLayout.minimumLineSpacing = 30
-        tdLayout.itemSize = .init(width: view.bounds.width - 40, height: view.bounds.height / 8)
+        tdLayout.itemSize = .init(width: view.bounds.width - 40,
+                                  height: view.bounds.height / 8)
 
         tdCollectionView = UICollectionView(frame: .zero, collectionViewLayout: tdLayout)
         tdCollectionView.makeShadow()

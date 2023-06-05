@@ -22,8 +22,10 @@ extension UIView {
         layer.shadowRadius = 0
     }
     
-    func makeBorder(of width: CGFloat) {
-        self.layer.borderColor = .init(red: 1, green: 1, blue: 1, alpha: 1)
+    func makeBorder(of width: CGFloat,
+                    color: UIColor = R.Colors.specialWhiteColor) {
+        
+        self.layer.borderColor = color.cgColor
         self.layer.borderWidth = width
     }
     
