@@ -68,18 +68,13 @@ final class TDViewController: BaseController {
     
     private var tdCollectionView: UICollectionView!
     
-    private let taskManager: TaskManager = TaskManager()
+    private let taskManager: TaskManager = TaskManager(dbManager: RealmManager())
     
     
     // Setup Controller
     
     init(userName: String) {
         super.init(nibName: nil, bundle: nil)
-        
-        taskManager.createTask(with: "Waking up", time: nil, priority: nil, isDone: true)
-        taskManager.createTask(with: "Going eat", time: nil, priority: nil, isDone: true)
-        taskManager.createTask(with: "Meet up", time: nil, priority: nil, isDone: false)
-        taskManager.createTask(with: "Working", time: nil, priority: nil, isDone: false)
         
         let currentName = userName == "" ? "bro" : userName
         self.greatingTitle.text = R.Strings.greatingLabelTD.rawValue + currentName.capitalized + "!"
@@ -115,7 +110,9 @@ extension TDViewController {
     
     override func setupView() {
         super.setupView()
+        setupTempData()
         setupTDCollectionView()
+        
         [
             greatingTitle, greatingSubtitle, searchView, dateLable,
             modeSelectionView, addButton, calendarButton, todayTasksLable, tdCollectionView
@@ -187,13 +184,13 @@ extension TDViewController {
 extension TDViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return taskManager.tasks.count
+        return taskManager.getTasks().count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let tdCell = collectionView.dequeueReusableCell(withReuseIdentifier: TDCell.cellId,
                                                               for: indexPath) as? TDCell else { return UICollectionViewCell() }
-        let task = taskManager.tasks[indexPath.item]
+        let task = taskManager.getTasks()[indexPath.item]
         tdCell.configureCell(with: task.text, isDone: task.isDone)
         return tdCell
     }
@@ -202,17 +199,38 @@ extension TDViewController: UICollectionViewDataSource {
 extension TDViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let task = taskManager.tasks[indexPath.item]
+        let task = taskManager.getTasks()[indexPath.item]
         task.switchState()
+        taskManager.updateTask(by: task.id,
+                               text: task.text,
+                               time: task.time,
+                               priority: task.priority,
+                               isDone: task.isDone)
         collectionView.reloadData()
     }
     
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let task = taskManager.tasks[indexPath.item]
+         let task = taskManager.getTasks()[indexPath.item]
         taskManager.getTaskInfo(by: task.id)
         collectionView.reloadData()
         return true
+    }
+}
+
+//MARK: - Data Extension
+
+extension TDViewController {
+    
+    func setupTempData() {
+        taskManager.createTask(with: "Waking up", time: nil, priority: nil, isDone: true)
+        taskManager.createTask(with: "Going eat", time: nil, priority: nil, isDone: true)
+        taskManager.createTask(with: "Meet up", time: nil, priority: nil, isDone: false)
+        taskManager.createTask(with: "Working", time: nil, priority: nil, isDone: false)
+        
+        taskManager.getTasks().forEach {
+            try! taskManager.dbManager.save(object: $0)
+        }
     }
 }
 

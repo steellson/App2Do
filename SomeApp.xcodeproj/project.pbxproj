@@ -23,6 +23,10 @@
 		3DB45C0C2A29334700999750 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C0B2A29334700999750 /* TaskManager.swift */; };
 		3DB45C0E2A2B688A00999750 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C0D2A2B688A00999750 /* Task.swift */; };
 		3DB45C102A2BB76800999750 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C0F2A2BB76800999750 /* Mode.swift */; };
+		3DB45C1D2A2F86FE00999750 /* TaskRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C1C2A2F86FE00999750 /* TaskRealmModel.swift */; };
+		3DB45C202A2F87DB00999750 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB45C1F2A2F87DB00999750 /* Realm */; };
+		3DB45C222A2F87DB00999750 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB45C212A2F87DB00999750 /* RealmSwift */; };
+		3DB45C242A2F87F200999750 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C232A2F87F200999750 /* RealmManager.swift */; };
 		3DCC8B0B2A1E118800204A82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0A2A1E118800204A82 /* AppDelegate.swift */; };
 		3DCC8B0D2A1E118800204A82 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0C2A1E118800204A82 /* SceneDelegate.swift */; };
 		3DCC8B0F2A1E118800204A82 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0E2A1E118800204A82 /* WelcomeViewController.swift */; };
@@ -46,6 +50,8 @@
 		3DB45C0B2A29334700999750 /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		3DB45C0D2A2B688A00999750 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		3DB45C0F2A2BB76800999750 /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
+		3DB45C1C2A2F86FE00999750 /* TaskRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRealmModel.swift; sourceTree = "<group>"; };
+		3DB45C232A2F87F200999750 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		3DCC8B072A1E118800204A82 /* SomeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DCC8B0A2A1E118800204A82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DCC8B0C2A1E118800204A82 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DB45C222A2F87DB00999750 /* RealmSwift in Frameworks */,
+				3DB45C202A2F87DB00999750 /* Realm in Frameworks */,
 				3D6E6AB72A1E98390072A9C4 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,9 +164,19 @@
 		3DB45C0A2A29330200999750 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3DB45C1B2A2F86E000999750 /* DBService */,
 				3DB45C0B2A29334700999750 /* TaskManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		3DB45C1B2A2F86E000999750 /* DBService */ = {
+			isa = PBXGroup;
+			children = (
+				3DB45C232A2F87F200999750 /* RealmManager.swift */,
+				3DB45C1C2A2F86FE00999750 /* TaskRealmModel.swift */,
+			);
+			path = DBService;
 			sourceTree = "<group>";
 		};
 		3DCC8AFE2A1E118800204A82 = {
@@ -209,6 +227,8 @@
 			name = SomeApp;
 			packageProductDependencies = (
 				3D6E6AB62A1E98390072A9C4 /* SnapKit */,
+				3DB45C1F2A2F87DB00999750 /* Realm */,
+				3DB45C212A2F87DB00999750 /* RealmSwift */,
 			);
 			productName = SomeApp;
 			productReference = 3DCC8B072A1E118800204A82 /* SomeApp.app */;
@@ -240,6 +260,7 @@
 			mainGroup = 3DCC8AFE2A1E118800204A82;
 			packageReferences = (
 				3D6E6AB52A1E98390072A9C4 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				3DB45C1E2A2F87DB00999750 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 3DCC8B082A1E118800204A82 /* Products */;
 			projectDirPath = "";
@@ -272,6 +293,7 @@
 				3D68C0AA2A1FFB18005BB354 /* TDCell.swift in Sources */,
 				3DB45C072A28995B00999750 /* TextField.swift in Sources */,
 				3DB45BFB2A25434B00999750 /* ModeSelectionView.swift in Sources */,
+				3DB45C1D2A2F86FE00999750 /* TaskRealmModel.swift in Sources */,
 				3DB45C0C2A29334700999750 /* TaskManager.swift in Sources */,
 				3DCC8B0B2A1E118800204A82 /* AppDelegate.swift in Sources */,
 				3DB45BFE2A25460A00999750 /* ModeView.swift in Sources */,
@@ -283,6 +305,7 @@
 				3DB45C032A275B8100999750 /* SearchView.swift in Sources */,
 				3DB45C002A267C4B00999750 /* UIFont+Extension.swift in Sources */,
 				3DB45BF92A25374E00999750 /* TDTask.swift in Sources */,
+				3DB45C242A2F87F200999750 /* RealmManager.swift in Sources */,
 				3DB45C0E2A2B688A00999750 /* Task.swift in Sources */,
 				3DCC8B0D2A1E118800204A82 /* SceneDelegate.swift in Sources */,
 			);
@@ -504,6 +527,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		3DB45C1E2A2F87DB00999750 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -511,6 +542,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3D6E6AB52A1E98390072A9C4 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		3DB45C1F2A2F87DB00999750 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DB45C1E2A2F87DB00999750 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		3DB45C212A2F87DB00999750 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DB45C1E2A2F87DB00999750 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

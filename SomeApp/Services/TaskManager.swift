@@ -7,6 +7,8 @@
 import Foundation
 
 protocol TaskManagerProtocol: AnyObject {
+    var dbManager: DBManagerProtocol { get set }
+    
     func createTask(with text: String, time: String?, priority: Int?, isDone: Bool)
     func removeTask(by id: String)
     func updateTask(by id: String, text: String, time: String?, priority: Int?, isDone: Bool)
@@ -14,9 +16,19 @@ protocol TaskManagerProtocol: AnyObject {
 }
 
 final class TaskManager {
-
-    var tasks: [Task] = []
+        
+    private var tasks: [Task] = []
     
+    var dbManager: DBManagerProtocol
+    
+    init(dbManager: DBManagerProtocol) {
+        self.dbManager = dbManager
+    }
+    
+    #warning("Convert it!")
+    func getTasks() -> [Task] {
+        self.tasks
+    }
 }
 
 //MARK: - Task Manager Protocol Extension
