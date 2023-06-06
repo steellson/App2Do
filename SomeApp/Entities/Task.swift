@@ -4,8 +4,10 @@
 //  Created by Steellson
 //
 
+import Foundation
 
 protocol TaskProtocol: AnyObject {
+    var id: String { get }
     var text: String { get set }
     var time: String? { get set }
     var priority: Int? { get set }
@@ -16,6 +18,7 @@ protocol TaskProtocol: AnyObject {
 
 final class Task: TaskProtocol {
     
+    var id: String = UUID().uuidString
     var text: String
     var time: String?
     var priority: Int?
