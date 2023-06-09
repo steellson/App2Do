@@ -31,15 +31,19 @@ final class WelcomeViewController: BaseController {
     
     private let nameField: TextField = {
         let field = TextField()
-        field.placeholder = R.Strings.nameFieldPlaceholder.rawValue
         field.layer.cornerRadius = 16
         field.backgroundColor = R.Colors.deepGrayBackgroundColor
         field.makeBorder(of: 2)
         field.addFieldSpacer()
+        field.placeholder = R.Strings.nameFieldPlaceholder.rawValue
         return field
     }()
     
     private let startButton = UIButton(type: .system)
+    
+    var clientName: String {
+        self.nameField.text ?? ""
+    }
     
     private func setupStartButton() {
         startButton.setTitle(R.Strings.startButtonTitle.rawValue, for: .normal)
@@ -100,10 +104,15 @@ extension WelcomeViewController {
 private extension WelcomeViewController {
     
     @objc func startButtonTarget() {
-        let name = nameField.text ?? "bro"
-        let tdController = TDViewController(userName: name)
-        tdController.modalPresentationStyle = .fullScreen
-
-        self.present(tdController, animated: true)
+        if clientName != "" {
+            let mainViewController = TDViewController()
+            mainViewController.modalPresentationStyle = .fullScreen
+            mainViewController.clientName = clientName
+            
+            self.present(mainViewController, animated: true)
+        } else {
+            self.nameField.placeholder = "oups :j"
+            return
+        }
     }
 }

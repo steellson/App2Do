@@ -9,9 +9,10 @@ import SnapKit
 
 final class TDViewController: BaseController {
     
-    private let greatingTitle: UILabel = {
+    var clientName: String?
+    
+    private var greatingTitle: UILabel = {
         let label = UILabel()
-        label.text = R.Strings.greatingLabelTD.rawValue
         label.font = .chalkboard28
         label.textColor = R.Colors.specialLimeColor
         return label
@@ -73,19 +74,11 @@ final class TDViewController: BaseController {
         taskManager.getAllObjects()
     }
     
-    // Setup Controller
-    
-    init(userName: String) {
-        super.init(nibName: nil, bundle: nil)
-                
-        let currentName = userName == "" ? "bro" : userName
-        self.greatingTitle.text = R.Strings.greatingLabelTD.rawValue + currentName.capitalized + "!"
+    private func setupGreetingTitleText() {
+        guard let clientName = self.clientName else { return }
+        self.greatingTitle.text = R.Strings.greatingLabelTD.rawValue  + clientName
+
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     
     private func setupTDCollectionView() {
         let tdLayout = UICollectionViewFlowLayout()
@@ -112,6 +105,7 @@ extension TDViewController {
     
     override func setupView() {
         super.setupView()
+        setupGreetingTitleText()
         setupTDCollectionView()
         
         [

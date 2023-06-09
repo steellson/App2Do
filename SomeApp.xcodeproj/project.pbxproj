@@ -25,6 +25,7 @@
 		3DB45C242A2F87F200999750 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C232A2F87F200999750 /* RealmManager.swift */; };
 		3DB45C2A2A30EEB400999750 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB45C292A30EEB400999750 /* Realm */; };
 		3DB45C2C2A30EEB400999750 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB45C2B2A30EEB400999750 /* RealmSwift */; };
+		3DB45C482A33A56100999750 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C472A33A56100999750 /* OnboardingController.swift */; };
 		3DCC8B0B2A1E118800204A82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0A2A1E118800204A82 /* AppDelegate.swift */; };
 		3DCC8B0D2A1E118800204A82 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0C2A1E118800204A82 /* SceneDelegate.swift */; };
 		3DCC8B0F2A1E118800204A82 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0E2A1E118800204A82 /* WelcomeViewController.swift */; };
@@ -48,6 +49,7 @@
 		3DB45C0F2A2BB76800999750 /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		3DB45C1C2A2F86FE00999750 /* TaskRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRealmModel.swift; sourceTree = "<group>"; };
 		3DB45C232A2F87F200999750 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		3DB45C472A33A56100999750 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
 		3DCC8B072A1E118800204A82 /* SomeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DCC8B0A2A1E118800204A82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DCC8B0C2A1E118800204A82 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 		3DB45BF12A213B2600999750 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3DB45C472A33A56100999750 /* OnboardingController.swift */,
 				3DCC8B0E2A1E118800204A82 /* WelcomeViewController.swift */,
 				3D68C0A72A1FC4C6005BB354 /* TDViewController.swift */,
 				3DB45C012A275AC900999750 /* Subviews */,
@@ -195,8 +198,8 @@
 				3D6E6AB42A1E93F30072A9C4 /* App */,
 				3D6E6AA82A1E90460072A9C4 /* Base */,
 				3DB45BF72A25372F00999750 /* Entities */,
-				3DB45BF12A213B2600999750 /* Views */,
 				3D6E6AAC2A1E92290072A9C4 /* Extensions */,
+				3DB45BF12A213B2600999750 /* Views */,
 				3DB45C0A2A29330200999750 /* Services */,
 				3D6E6AA92A1E908B0072A9C4 /* Source */,
 			);
@@ -292,6 +295,7 @@
 				3DB45BFE2A25460A00999750 /* ModeView.swift in Sources */,
 				3DB45C102A2BB76800999750 /* Mode.swift in Sources */,
 				3D6E6AA72A1E903A0072A9C4 /* BaseView.swift in Sources */,
+				3DB45C482A33A56100999750 /* OnboardingController.swift in Sources */,
 				3D6E6AA52A1E902E0072A9C4 /* BaseController.swift in Sources */,
 				3DB45BF42A213B5100999750 /* Resources.swift in Sources */,
 				3D68C0A82A1FC4C6005BB354 /* TDViewController.swift in Sources */,
