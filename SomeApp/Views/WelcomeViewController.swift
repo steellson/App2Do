@@ -41,9 +41,8 @@ final class WelcomeViewController: BaseController {
     
     private let startButton = UIButton(type: .system)
     
-    var clientName: String {
-        self.nameField.text ?? ""
-    }
+    private let realmManager = RealmManager()
+    
     
     private func setupStartButton() {
         startButton.setTitle(R.Strings.startButtonTitle.rawValue, for: .normal)
@@ -104,11 +103,11 @@ extension WelcomeViewController {
 private extension WelcomeViewController {
     
     @objc func startButtonTarget() {
-        if clientName != "" {
+        if nameField.text != "" {
+            realmManager.setupClient(with: nameField.text!)
+            
             let mainViewController = TDViewController()
             mainViewController.modalPresentationStyle = .fullScreen
-            mainViewController.clientName = clientName
-            
             self.present(mainViewController, animated: true)
         } else {
             self.nameField.placeholder = "oups :j"

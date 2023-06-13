@@ -24,6 +24,7 @@ enum R {
         case startButtonTitle = "Go!"
         
         case greatingLabelTD = "Hey, "
+        case letsPlainLabel = "let's plain!"
         case greatingSubtitleText = "Are u ready for hardworking today? :)"
         case searchViewPlaceholder = "Type here ..."
         case todayTasksLabel = "Today tasks"

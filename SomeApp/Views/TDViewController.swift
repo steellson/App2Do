@@ -8,9 +8,7 @@ import UIKit
 import SnapKit
 
 final class TDViewController: BaseController {
-    
-    var clientName: String?
-    
+        
     private var greatingTitle: UILabel = {
         let label = UILabel()
         label.font = .chalkboard28
@@ -69,14 +67,15 @@ final class TDViewController: BaseController {
     
     private var tdCollectionView: UICollectionView!
     
-    private let taskManager = RealmManager()
+    private let realmManager = RealmManager()
+    
     private var tasks: [TaskRealmModel] {
-        taskManager.getAllObjects()
+        realmManager.getAllObjects()
     }
     
     private func setupGreetingTitleText() {
-        guard let clientName = self.clientName else { return }
-        self.greatingTitle.text = R.Strings.greatingLabelTD.rawValue  + clientName
+        let clientName = realmManager.getClientName()
+        self.greatingTitle.text = R.Strings.greatingLabelTD.rawValue  + clientName + "!"
 
     }
     
@@ -195,7 +194,7 @@ extension TDViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let task = tasks[indexPath.item]
-        taskManager.switchObjectState(forKey: task._id)
+        realmManager.switchObjectState(forKey: task._id)
         collectionView.reloadData()
     }
 }

@@ -7,6 +7,12 @@
 import Foundation
 import RealmSwift
 
+protocol ClientManagerProtocol: AnyObject {
+    func setupClient(with name: String)
+    func checkOnboarding() -> Bool
+    func getClientName() -> String
+}
+
 protocol DBManagerProtocol: AnyObject {
     var objects: [TaskRealmModel] { get }
     func save(object: Object) throws
@@ -17,6 +23,8 @@ protocol DBManagerProtocol: AnyObject {
     func getObjectStats(forKey: String) throws
     func switchObjectState(forKey: String)
 }
+
+//MARK: - Realm Manager Impl
 
 final class RealmManager: NSObject {
     
@@ -36,8 +44,36 @@ final class RealmManager: NSObject {
     }()
     
     private lazy var mainRealm = try! Realm(configuration: configuration)
+    
+    private var client = ClientRealmModel()
 }
 
+//MARK: - Client
+
+extension RealmManager: ClientManagerProtocol {
+    
+    func setupClient(with name: String) {
+        self.client.name = name
+        
+        do {
+            try mainRealm.write {
+                mainRealm.add(self.client)
+            }
+        } catch (let error) {
+            print("Can't setup client: \(error.localizedDescription)")
+        }
+    }
+
+    func checkOnboarding() -> Bool {
+        Array(mainRealm.objects(ClientRealmModel.self)).isEmpty
+    }
+    
+    func getClientName() -> String {
+        mainRealm.objects(ClientRealmModel.self).map { $0.name }.first ?? R.Strings.letsPlainLabel.rawValue
+    }
+}
+
+//MARK: - DB
 
 extension RealmManager: DBManagerProtocol {
     
