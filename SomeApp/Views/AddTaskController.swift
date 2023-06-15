@@ -15,6 +15,7 @@ final class AddTaskController: BaseController {
     private let taskTextView = UITextView()
     private let addTaskButton = UIButton()
 
+    private let dateService = DateService()
     private let realmManager = RealmManager()
     
     // Setup methods
@@ -108,6 +109,7 @@ extension AddTaskController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         textView.resignFirstResponder() //
+        textView.enablesReturnKeyAutomatically = true
     }
     
     
@@ -122,18 +124,16 @@ extension AddTaskController: UITextViewDelegate {
     }
     
     func addTaskButtonAction() {
-        let task = TaskRealmModel()
-        let currentTime = Date().description(with: .current)
-        
         if self.taskTextView.text != "" {
+            let task = TaskRealmModel()
             task.text = taskTextView.text ?? "Empty task :j"
-            task.time = currentTime
-        }
-
-        do {
-            try realmManager.save(object: task)
-        } catch (let error) {
-            print("Creating task error: \(error.localizedDescription)")
+            task.time = dateService.getCurrentTime()
+            
+            do {
+                try realmManager.save(object: task)
+            } catch (let error) {
+                print("Creating task error: \(error.localizedDescription)")
+            }
         }
     }
 }
