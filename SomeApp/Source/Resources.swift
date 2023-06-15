@@ -30,6 +30,7 @@ enum R {
         case todayTasksLabel = "Today tasks"
         
         case addTaskTextLabel = "Write you task here!"
+        case addTaskButtonTitle = "Add"
         
         case tdCellReuseIdentifier = "TDCell"
     }

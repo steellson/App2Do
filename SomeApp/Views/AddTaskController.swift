@@ -37,8 +37,10 @@ final class AddTaskController: BaseController {
     
     private func setupTaskTextView() {
         taskTextView.layer.cornerRadius = 10
-        taskTextView.font = .chalkboard18
-        taskTextView.textColor = R.Colors.specialWhiteColor
+        taskTextView.font = .chalkboard24
+        taskTextView.keyboardAppearance = .dark
+        taskTextView.textContainerInset = .init(top: 10, left: 10, bottom: 10, right: 10)
+        taskTextView.textColor = .black
         taskTextView.backgroundColor = R.Colors.shadowGrayColor
         taskTextView.makeBorder(of: 2)
         taskTextView.delegate = self
@@ -48,9 +50,9 @@ final class AddTaskController: BaseController {
         addTaskButton.layer.cornerRadius = 10
         addTaskButton.makeBorder(of: 2, color: R.Colors.shadowGrayColor)
         addTaskButton.backgroundColor = R.Colors.specialLimeColor
-        addTaskButton.setImage(R.Images.addTaskButtonImage, for: .normal)
-        addTaskButton.tintColor = .black
-        addTaskButton.titleLabel?.font = .chalkboard28
+        addTaskButton.setTitle(R.Strings.addTaskButtonTitle.rawValue, for: .normal)
+        addTaskButton.setTitleColor(.black, for: .normal)
+        addTaskButton.titleLabel?.font = .chalkboard16
         addTaskButton.addTarget(self, action: #selector(addTaskButtonAction), for: .touchUpInside)
     }
 }
@@ -92,7 +94,7 @@ extension AddTaskController {
         taskTextView.snp.makeConstraints {
             $0.top.equalTo(addNewTaskLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(view.frame.height * 0.5)
+            $0.height.equalTo(view.frame.height * 0.4)
         }
         
         addTaskButton.snp.makeConstraints {
@@ -131,6 +133,9 @@ extension AddTaskController: UITextViewDelegate {
             
             do {
                 try realmManager.save(object: task)
+                print("Task \(task) saved!")
+                
+                self.dismiss(animated: true)
             } catch (let error) {
                 print("Creating task error: \(error.localizedDescription)")
             }
