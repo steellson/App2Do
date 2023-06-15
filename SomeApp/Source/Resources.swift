@@ -29,6 +29,8 @@ enum R {
         case searchViewPlaceholder = "Type here ..."
         case todayTasksLabel = "Today tasks"
         
+        case addTaskTextLabel = "Write you task here!"
+        
         case tdCellReuseIdentifier = "TDCell"
     }
     
@@ -40,5 +42,6 @@ enum R {
         static let editmarkImage = UIImage(systemName: "pencil")
         static let addTaskButtonImage = UIImage(systemName: "plus")
         static let calendarButtonImage = UIImage(systemName: "calendar")
+        static let cancelButtonImage = UIImage(systemName: "arrowshape.turn.up.backward.2.fill")
     }
 }

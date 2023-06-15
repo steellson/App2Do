@@ -44,16 +44,7 @@ final class TDViewController: BaseController {
         return label
     }()
     
-    private let addButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.layer.cornerRadius = 10
-        button.makeBorder(of: 2, color: R.Colors.shadowGrayColor)
-        button.backgroundColor = R.Colors.specialLimeColor
-        button.setImage(R.Images.addTaskButtonImage, for: .normal)
-        button.tintColor = .black
-        button.titleLabel?.font = .chalkboard28
-        return button
-    }()
+    private let addButton = UIButton()
     
     private let calendarButton: UIButton = {
         let button = UIButton(type: .system)
@@ -77,6 +68,16 @@ final class TDViewController: BaseController {
         let clientName = realmManager.getClientName()
         self.greatingTitle.text = R.Strings.greatingLabelTD.rawValue  + clientName + "!"
 
+    }
+    
+    private func setupAddButton() {
+        addButton.layer.cornerRadius = 10
+        addButton.makeBorder(of: 2, color: R.Colors.shadowGrayColor)
+        addButton.backgroundColor = R.Colors.specialLimeColor
+        addButton.setImage(R.Images.addTaskButtonImage, for: .normal)
+        addButton.tintColor = .black
+        addButton.titleLabel?.font = .chalkboard28
+        addButton.addTarget(self, action: #selector(addNewTaskButtonAction), for: .touchUpInside)
     }
     
     private func setupTDCollectionView() {
@@ -105,6 +106,7 @@ extension TDViewController {
     override func setupView() {
         super.setupView()
         setupGreetingTitleText()
+        setupAddButton()
         setupTDCollectionView()
         
         [
@@ -196,6 +198,18 @@ extension TDViewController: UICollectionViewDelegate {
         let task = tasks[indexPath.item]
         realmManager.switchObjectState(forKey: task._id)
         collectionView.reloadData()
+    }
+}
+
+
+//MARK: - Button Actions
+
+@objc private extension TDViewController {
+    
+     func addNewTaskButtonAction() {
+        let addTaskcontroller = AddTaskController()
+        addTaskcontroller.modalPresentationStyle = .fullScreen
+        self.present(addTaskcontroller, animated: true)
     }
 }
 
