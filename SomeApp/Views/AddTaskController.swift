@@ -10,7 +10,7 @@ import SnapKit
 
 final class AddTaskController: BaseController {
     
-    private var calncelButton = TDButton(.cancelButton)
+    private var cancelButton = TDButton(.cancelButton)
     private let addNewTaskLabel = UILabel()
     private let taskTextView = UITextView()
     private let addTaskButton = TDButton(.addButton)
@@ -22,7 +22,7 @@ final class AddTaskController: BaseController {
     // Setup methods
     
     private func setupCancelButton() {
-        calncelButton.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
     }
     
     private func setupAddNewTaskLabel() {
@@ -61,7 +61,7 @@ extension AddTaskController {
         setupAddTaskButton()
         
         [
-         calncelButton, addNewTaskLabel,
+         cancelButton, addNewTaskLabel,
          taskTextView,addTaskButton
         ].forEach { view.addNewSubbview($0) }
         
@@ -70,14 +70,14 @@ extension AddTaskController {
     override func setupLayout() {
         super.setupLayout()
         
-        calncelButton.snp.makeConstraints {
+        cancelButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaInsets.top).offset(50)
             $0.leading.equalToSuperview().offset(20)
             $0.width.height.equalTo(45)
         }
         
         addNewTaskLabel.snp.makeConstraints {
-            $0.top.equalTo(calncelButton.snp.bottom).offset(30)
+            $0.top.equalTo(cancelButton.snp.bottom).offset(30)
             $0.leading.trailing.equalToSuperview().inset(20)
         }
         

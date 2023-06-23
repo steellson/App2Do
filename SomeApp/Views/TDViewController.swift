@@ -8,7 +8,7 @@ import UIKit
 import SnapKit
 
 final class TDViewController: BaseController {
-        
+    
     private var greatingTitle: UILabel = {
         let label = UILabel()
         label.font = .chalkboard28
@@ -45,9 +45,7 @@ final class TDViewController: BaseController {
     }()
     
     private let addButton = TDButton(.addButton)
-    
     private let plainButton = TDButton(.plainButton)
-    
     private var tdCollectionView: UICollectionView!
     
     private let realmManager = RealmManager()
@@ -59,7 +57,7 @@ final class TDViewController: BaseController {
     private func setupGreetingTitleText() {
         let clientName = realmManager.getClientName()
         self.greatingTitle.text = R.Strings.greatingLabelTD.rawValue  + clientName + "!"
-
+        
     }
     
     private func setupAddButton() {
@@ -76,7 +74,7 @@ final class TDViewController: BaseController {
         tdLayout.minimumLineSpacing = 30
         tdLayout.itemSize = .init(width: view.bounds.width - 40,
                                   height: view.bounds.height / 8)
-
+        
         tdCollectionView = UICollectionView(frame: .zero, collectionViewLayout: tdLayout)
         tdCollectionView.makeShadow()
         tdCollectionView.layer.cornerRadius = 10
@@ -97,6 +95,7 @@ extension TDViewController {
         super.setupView()
         setupGreetingTitleText()
         setupAddButton()
+        setupPlainButton()
         setupTDCollectionView()
         
         [
@@ -104,10 +103,10 @@ extension TDViewController {
             modeSelectionView, addButton, plainButton, todayTasksLable, tdCollectionView
         ].forEach { view.addNewSubbview($0) }
     }
-
+    
     override func setupLayout() {
         super.setupLayout()
-                
+        
         greatingTitle.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaInsets.top).offset(50)
             $0.leading.equalToSuperview().offset(20)
@@ -156,7 +155,7 @@ extension TDViewController {
             $0.trailing.equalTo(plainButton.snp.leading).offset(-20)
             $0.height.width.equalTo(45)
         }
-                
+        
         tdCollectionView.snp.makeConstraints {
             $0.top.equalTo(addButton.snp.bottom).offset(25)
             $0.leading.trailing.bottom.equalToSuperview()
@@ -196,23 +195,23 @@ extension TDViewController: UICollectionViewDelegate {
 
 @objc private extension TDViewController {
     
-     func addNewTaskButtonAction() {
+    func addNewTaskButtonAction() {
         let addTaskController = AddTaskController()
         addTaskController.modalPresentationStyle = .fullScreen
         self.present(addTaskController, animated: true)
     }
     
     func plainButtonAction() {
-       let plainController = PlainController()
+        let plainController = PlainController()
         plainController.modalPresentationStyle = .fullScreen
-       self.present(plainController, animated: true)
-   }
+        self.present(plainController, animated: true)
+    }
 }
 
 /*
-//MARK: - TDViewControllerViewProtocol Extension
-
-extension TDViewController: TDViewControllerViewProtocol {
-    
-}
-*/
+ //MARK: - TDViewControllerViewProtocol Extension
+ 
+ extension TDViewController: TDViewControllerViewProtocol {
+ 
+ }
+ */

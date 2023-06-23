@@ -30,6 +30,7 @@
 		3DB45C522A3BA10F00999750 /* PlainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C512A3BA10F00999750 /* PlainController.swift */; };
 		3DB45C852A45BE6300999750 /* TDButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C842A45BE6300999750 /* TDButton.swift */; };
 		3DB45C872A45C73800999750 /* TDTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C862A45C73800999750 /* TDTextField.swift */; };
+		3DB45C892A45E47E00999750 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C882A45E47E00999750 /* CalendarCell.swift */; };
 		3DCC8B0B2A1E118800204A82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0A2A1E118800204A82 /* AppDelegate.swift */; };
 		3DCC8B0D2A1E118800204A82 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0C2A1E118800204A82 /* SceneDelegate.swift */; };
 		3DCC8B0F2A1E118800204A82 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0E2A1E118800204A82 /* WelcomeViewController.swift */; };
@@ -58,6 +59,7 @@
 		3DB45C512A3BA10F00999750 /* PlainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainController.swift; sourceTree = "<group>"; };
 		3DB45C842A45BE6300999750 /* TDButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDButton.swift; sourceTree = "<group>"; };
 		3DB45C862A45C73800999750 /* TDTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDTextField.swift; sourceTree = "<group>"; };
+		3DB45C882A45E47E00999750 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		3DCC8B072A1E118800204A82 /* SomeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DCC8B0A2A1E118800204A82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DCC8B0C2A1E118800204A82 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				3D68C0A92A1FFB18005BB354 /* TDCell.swift */,
+				3DB45C882A45E47E00999750 /* CalendarCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				3DB45C1D2A2F86FE00999750 /* TaskRealmModel.swift in Sources */,
 				3DCC8B0B2A1E118800204A82 /* AppDelegate.swift in Sources */,
 				3DB45BFE2A25460A00999750 /* ModeView.swift in Sources */,
+				3DB45C892A45E47E00999750 /* CalendarCell.swift in Sources */,
 				3DB45C872A45C73800999750 /* TDTextField.swift in Sources */,
 				3DB45C852A45BE6300999750 /* TDButton.swift in Sources */,
 				3DB45C4C2A38FA6B00999750 /* AppRouter.swift in Sources */,

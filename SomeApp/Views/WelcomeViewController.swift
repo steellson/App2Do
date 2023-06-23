@@ -30,7 +30,6 @@ final class WelcomeViewController: BaseController {
     }()
     
     private let nameField = TDTextField(R.Strings.nameFieldPlaceholder.rawValue)
-    
     private let startButton = UIButton(type: .system)
     
     private let realmManager = RealmManager()

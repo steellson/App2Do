@@ -32,7 +32,8 @@ enum R {
         case addTaskTextLabel = "Write you task here!"
         case addTaskButtonTitle = "Add"
         
-        case tdCellReuseIdentifier = "TDCell"
+        case tdCellReuseIdentifier
+        case calendarCellReuseIndentifier
     }
     
     enum Images {
