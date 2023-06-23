@@ -10,22 +10,18 @@ import SnapKit
 
 final class AddTaskController: BaseController {
     
-    private var calncelButton = UIButton()
+    private var calncelButton = TDButton(.cancelButton)
     private let addNewTaskLabel = UILabel()
     private let taskTextView = UITextView()
-    private let addTaskButton = UIButton()
+    private let addTaskButton = TDButton(.addButton)
 
     private let dateService = DateService()
     private let realmManager = RealmManager()
     
+    
     // Setup methods
     
     private func setupCancelButton() {
-        calncelButton.layer.cornerRadius = 10
-        calncelButton.backgroundColor = R.Colors.specialPinkColor
-        calncelButton.makeBorder(of: 2, color: R.Colors.shadowGrayColor)
-        calncelButton.setImage(R.Images.cancelButtonImage, for: .normal)
-        calncelButton.tintColor = .black
         calncelButton.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
     }
     
@@ -47,12 +43,6 @@ final class AddTaskController: BaseController {
     }
     
     private func setupAddTaskButton() {
-        addTaskButton.layer.cornerRadius = 10
-        addTaskButton.makeBorder(of: 2, color: R.Colors.shadowGrayColor)
-        addTaskButton.backgroundColor = R.Colors.specialLimeColor
-        addTaskButton.setTitle(R.Strings.addTaskButtonTitle.rawValue, for: .normal)
-        addTaskButton.setTitleColor(.black, for: .normal)
-        addTaskButton.titleLabel?.font = .chalkboard16
         addTaskButton.addTarget(self, action: #selector(addTaskButtonAction), for: .touchUpInside)
     }
 }
@@ -100,18 +90,18 @@ extension AddTaskController {
         addTaskButton.snp.makeConstraints {
             $0.top.equalTo(taskTextView.snp.bottom).offset(30)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.width.height.equalTo(60)
+            $0.width.height.equalTo(45)
         }
     }
 }
 
-//MARK: - TasTextViewDelegate Extension
+//MARK: - TaskTextViewDelegate Extension
 
 extension AddTaskController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        textView.resignFirstResponder() //
         textView.enablesReturnKeyAutomatically = true
+        textView.returnKeyType = .done
     }
     
     

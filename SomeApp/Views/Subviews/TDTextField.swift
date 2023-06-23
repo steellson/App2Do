@@ -1,5 +1,5 @@
 //
-//  TextField.swift
+//  TDTextField.swift
 //
 //  Created by Steellson
 //
@@ -7,13 +7,14 @@
 import UIKit
 
 
-final class TextField: UITextField {
+final class TDTextField: UITextField {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(_ placeholder: String) {
+        super.init(frame: .zero)
         
-        setupAppereance()
+        setupTextFieldAppereance()
         setupPlaceholderAppereance()
+        addFieldSpacer()
     }
     
     required init?(coder: NSCoder) {
@@ -23,18 +24,12 @@ final class TextField: UITextField {
     
     // Methods
     
-    func addFieldSpacer() {
-        let imageView = UIImageView(image: R.Images.textFieldSpacer)
-        imageView.tintColor = .clear
-        leftView = imageView
-        leftViewMode = .always
-    }
-    
-    
-    private func setupAppereance() {
+    private func setupTextFieldAppereance() {
         textColor = R.Colors.specialWhiteColor
         tintColor = R.Colors.specialWhiteColor
-        placeholder = R.Strings.searchViewPlaceholder.rawValue
+        backgroundColor = R.Colors.deepGrayBackgroundColor
+        makeBorder(of: 2)
+        layer.cornerRadius = 16
         font = .chalkboard18
         keyboardAppearance = .dark
         returnKeyType = .search
@@ -48,4 +43,11 @@ final class TextField: UITextField {
         self.attributedPlaceholder = attributedString
     }
     
+    private func addFieldSpacer() {
+        let imageView = UIImageView(image: R.Images.textFieldSpacer)
+        imageView.tintColor = .clear
+        leftView = imageView
+        leftViewMode = .always
+    }
 }
+

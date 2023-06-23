@@ -24,7 +24,7 @@ final class TDViewController: BaseController {
         return label
     }()
     
-    private let searchView = SearchView()
+    private let categoriesView = UIView()
     
     private let dateLable: UILabel = {
         let label = UILabel()
@@ -44,17 +44,9 @@ final class TDViewController: BaseController {
         return label
     }()
     
-    private let addButton = UIButton()
+    private let addButton = TDButton(.addButton)
     
-    private let calendarButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.layer.cornerRadius = 10
-        button.backgroundColor = R.Colors.specialPinkColor
-        button.makeBorder(of: 2, color: R.Colors.shadowGrayColor)
-        button.setImage(R.Images.calendarButtonImage, for: .normal)
-        button.tintColor = .black
-        return button
-    }()
+    private let plainButton = TDButton(.plainButton)
     
     private var tdCollectionView: UICollectionView!
     
@@ -71,12 +63,6 @@ final class TDViewController: BaseController {
     }
     
     private func setupAddButton() {
-        addButton.layer.cornerRadius = 10
-        addButton.makeBorder(of: 2, color: R.Colors.shadowGrayColor)
-        addButton.backgroundColor = R.Colors.specialLimeColor
-        addButton.setImage(R.Images.addTaskButtonImage, for: .normal)
-        addButton.tintColor = .black
-        addButton.titleLabel?.font = .chalkboard28
         addButton.addTarget(self, action: #selector(addNewTaskButtonAction), for: .touchUpInside)
     }
     
@@ -110,8 +96,8 @@ extension TDViewController {
         setupTDCollectionView()
         
         [
-            greatingTitle, greatingSubtitle, searchView, dateLable,
-            modeSelectionView, addButton, calendarButton, todayTasksLable, tdCollectionView
+            greatingTitle, greatingSubtitle, categoriesView, dateLable,
+            modeSelectionView, addButton, plainButton, todayTasksLable, tdCollectionView
         ].forEach { view.addNewSubbview($0) }
     }
 
@@ -130,7 +116,7 @@ extension TDViewController {
             $0.trailing.equalToSuperview().offset(-20)
         }
         
-        searchView.snp.makeConstraints {
+        categoriesView.snp.makeConstraints {
             $0.top.equalTo(greatingSubtitle.snp.bottom).offset(25)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
@@ -138,7 +124,7 @@ extension TDViewController {
         }
         
         dateLable.snp.makeConstraints {
-            $0.top.equalTo(searchView.snp.bottom).offset(25)
+            $0.top.equalTo(categoriesView.snp.bottom).offset(25)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
         }
@@ -155,7 +141,7 @@ extension TDViewController {
             $0.leading.equalToSuperview().offset(20)
         }
         
-        calendarButton.snp.makeConstraints {
+        plainButton.snp.makeConstraints {
             $0.top.equalTo(modeSelectionView.snp.bottom).offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.width.equalTo(45)
@@ -163,7 +149,7 @@ extension TDViewController {
         
         addButton.snp.makeConstraints {
             $0.top.equalTo(modeSelectionView.snp.bottom).offset(20)
-            $0.trailing.equalTo(calendarButton.snp.leading).offset(-20)
+            $0.trailing.equalTo(plainButton.snp.leading).offset(-20)
             $0.height.width.equalTo(45)
         }
                 
@@ -207,10 +193,16 @@ extension TDViewController: UICollectionViewDelegate {
 @objc private extension TDViewController {
     
      func addNewTaskButtonAction() {
-        let addTaskcontroller = AddTaskController()
-        addTaskcontroller.modalPresentationStyle = .fullScreen
-        self.present(addTaskcontroller, animated: true)
+        let addTaskController = AddTaskController()
+        addTaskController.modalPresentationStyle = .fullScreen
+        self.present(addTaskController, animated: true)
     }
+    
+    func plainButtonAction() {
+       let plainController = PlainController()
+        plainController.modalPresentationStyle = .fullScreen
+       self.present(plainController, animated: true)
+   }
 }
 
 /*

@@ -18,8 +18,6 @@
 		3DB45BFB2A25434B00999750 /* ModeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45BFA2A25434B00999750 /* ModeSelectionView.swift */; };
 		3DB45BFE2A25460A00999750 /* ModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45BFD2A25460A00999750 /* ModeView.swift */; };
 		3DB45C002A267C4B00999750 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45BFF2A267C4B00999750 /* UIFont+Extension.swift */; };
-		3DB45C032A275B8100999750 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C022A275B8100999750 /* SearchView.swift */; };
-		3DB45C072A28995B00999750 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C062A28995B00999750 /* TextField.swift */; };
 		3DB45C102A2BB76800999750 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C0F2A2BB76800999750 /* Mode.swift */; };
 		3DB45C1D2A2F86FE00999750 /* TaskRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C1C2A2F86FE00999750 /* TaskRealmModel.swift */; };
 		3DB45C242A2F87F200999750 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C232A2F87F200999750 /* RealmManager.swift */; };
@@ -30,6 +28,8 @@
 		3DB45C4E2A3B89D700999750 /* AddTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C4D2A3B89D700999750 /* AddTaskController.swift */; };
 		3DB45C502A3B9B1E00999750 /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C4F2A3B9B1E00999750 /* DateService.swift */; };
 		3DB45C522A3BA10F00999750 /* PlainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C512A3BA10F00999750 /* PlainController.swift */; };
+		3DB45C852A45BE6300999750 /* TDButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C842A45BE6300999750 /* TDButton.swift */; };
+		3DB45C872A45C73800999750 /* TDTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45C862A45C73800999750 /* TDTextField.swift */; };
 		3DCC8B0B2A1E118800204A82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0A2A1E118800204A82 /* AppDelegate.swift */; };
 		3DCC8B0D2A1E118800204A82 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0C2A1E118800204A82 /* SceneDelegate.swift */; };
 		3DCC8B0F2A1E118800204A82 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0E2A1E118800204A82 /* WelcomeViewController.swift */; };
@@ -48,8 +48,6 @@
 		3DB45BFA2A25434B00999750 /* ModeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectionView.swift; sourceTree = "<group>"; };
 		3DB45BFD2A25460A00999750 /* ModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeView.swift; sourceTree = "<group>"; };
 		3DB45BFF2A267C4B00999750 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
-		3DB45C022A275B8100999750 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		3DB45C062A28995B00999750 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		3DB45C0F2A2BB76800999750 /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		3DB45C1C2A2F86FE00999750 /* TaskRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRealmModel.swift; sourceTree = "<group>"; };
 		3DB45C232A2F87F200999750 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -58,6 +56,8 @@
 		3DB45C4D2A3B89D700999750 /* AddTaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskController.swift; sourceTree = "<group>"; };
 		3DB45C4F2A3B9B1E00999750 /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		3DB45C512A3BA10F00999750 /* PlainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainController.swift; sourceTree = "<group>"; };
+		3DB45C842A45BE6300999750 /* TDButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDButton.swift; sourceTree = "<group>"; };
+		3DB45C862A45C73800999750 /* TDTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDTextField.swift; sourceTree = "<group>"; };
 		3DCC8B072A1E118800204A82 /* SomeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DCC8B0A2A1E118800204A82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DCC8B0C2A1E118800204A82 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -162,8 +162,8 @@
 		3DB45C012A275AC900999750 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				3DB45C022A275B8100999750 /* SearchView.swift */,
-				3DB45C062A28995B00999750 /* TextField.swift */,
+				3DB45C842A45BE6300999750 /* TDButton.swift */,
+				3DB45C862A45C73800999750 /* TDTextField.swift */,
 				3DB45BFC2A25451F00999750 /* ModeSelectionBlock */,
 			);
 			path = Subviews;
@@ -300,18 +300,18 @@
 				3DCC8B0F2A1E118800204A82 /* WelcomeViewController.swift in Sources */,
 				3D6E6AAE2A1E92470072A9C4 /* UIView+Extension.swift in Sources */,
 				3D68C0AA2A1FFB18005BB354 /* TDCell.swift in Sources */,
-				3DB45C072A28995B00999750 /* TextField.swift in Sources */,
 				3DB45BFB2A25434B00999750 /* ModeSelectionView.swift in Sources */,
 				3DB45C1D2A2F86FE00999750 /* TaskRealmModel.swift in Sources */,
 				3DCC8B0B2A1E118800204A82 /* AppDelegate.swift in Sources */,
 				3DB45BFE2A25460A00999750 /* ModeView.swift in Sources */,
+				3DB45C872A45C73800999750 /* TDTextField.swift in Sources */,
+				3DB45C852A45BE6300999750 /* TDButton.swift in Sources */,
 				3DB45C4C2A38FA6B00999750 /* AppRouter.swift in Sources */,
 				3DB45C102A2BB76800999750 /* Mode.swift in Sources */,
 				3D6E6AA72A1E903A0072A9C4 /* BaseView.swift in Sources */,
 				3D6E6AA52A1E902E0072A9C4 /* BaseController.swift in Sources */,
 				3DB45BF42A213B5100999750 /* Resources.swift in Sources */,
 				3D68C0A82A1FC4C6005BB354 /* TDViewController.swift in Sources */,
-				3DB45C032A275B8100999750 /* SearchView.swift in Sources */,
 				3DB45C502A3B9B1E00999750 /* DateService.swift in Sources */,
 				3DB45C4A2A38CC0900999750 /* ClientRealmModel.swift in Sources */,
 				3DB45C002A267C4B00999750 /* UIFont+Extension.swift in Sources */,

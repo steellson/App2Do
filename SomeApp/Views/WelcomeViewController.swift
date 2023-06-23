@@ -29,15 +29,7 @@ final class WelcomeViewController: BaseController {
         return label
     }()
     
-    private let nameField: TextField = {
-        let field = TextField()
-        field.layer.cornerRadius = 16
-        field.backgroundColor = R.Colors.deepGrayBackgroundColor
-        field.makeBorder(of: 2)
-        field.addFieldSpacer()
-        field.placeholder = R.Strings.nameFieldPlaceholder.rawValue
-        return field
-    }()
+    private let nameField = TDTextField(R.Strings.nameFieldPlaceholder.rawValue)
     
     private let startButton = UIButton(type: .system)
     
