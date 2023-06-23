@@ -25,15 +25,7 @@ final class TDViewController: BaseController {
     }()
     
     private let categoriesView = UIView()
-    
-    private let dateLable: UILabel = {
-        let label = UILabel()
-        label.text = "17th April"
-        label.font = .chalkboard28
-        label.textColor = R.Colors.specialLimeColor
-        return label
-    }()
-    
+    private let dateLable = TDDateLabel()
     private let modeSelectionView = ModeSelectionView()
     
     private let todayTasksLable: UILabel = {

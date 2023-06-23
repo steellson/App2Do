@@ -8,6 +8,8 @@ import Foundation
 
 protocol DateServiceProtocol: AnyObject {
     func getCurrentDate() -> String
+    func getCurrentDayNumber() -> Int
+    func getCurrentMonth() -> String
     func getCurrentTime() -> String
     func getDifference(from destinationTime: Date?)
 }
@@ -15,6 +17,7 @@ protocol DateServiceProtocol: AnyObject {
 final class DateService {
     
     private let date = Date()
+    private let dateFormatter = DateFormatter()
     
     private var currentDate: String {
         let day = Calendar.current.component(.day, from: self.date)
@@ -22,6 +25,15 @@ final class DateService {
         let year = Calendar.current.component(.year, from: self.date)
         let current = "\(day).\(month).\(year)"
         return current
+    }
+    
+    private var currentDayNumber: Int {
+        Calendar.current.component(.day, from: self.date)
+    }
+    
+    private var currentMonth: String {
+        dateFormatter.dateFormat = "MMMM"
+        return dateFormatter.string(from: self.date)
     }
     
     private var currentTime: String {
@@ -40,11 +52,19 @@ final class DateService {
 extension DateService: DateServiceProtocol {
     
     func getCurrentDate() -> String {
-        return self.currentDate
+        self.currentDate
+    }
+    
+    func getCurrentDayNumber() -> Int {
+        self.currentDayNumber
+    }
+    
+    func getCurrentMonth() -> String {
+        self.currentMonth
     }
     
     func getCurrentTime() -> String {
-        return self.currentTime
+        self.currentTime
     }
     
     func getDifference(from destinationTime: Date?) {
