@@ -66,6 +66,10 @@ final class TDViewController: BaseController {
         addButton.addTarget(self, action: #selector(addNewTaskButtonAction), for: .touchUpInside)
     }
     
+    private func setupPlainButton() {
+        plainButton.addTarget(self, action: #selector(plainButtonAction), for: .touchUpInside)
+    }
+    
     private func setupTDCollectionView() {
         let tdLayout = UICollectionViewFlowLayout()
         tdLayout.scrollDirection = .vertical

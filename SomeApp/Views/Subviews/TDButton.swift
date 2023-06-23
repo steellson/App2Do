@@ -18,7 +18,7 @@ final class TDButton: UIButton {
     
     init(_ buttonType: TDButtonType) {
         self.tdButtonType = buttonType
-        super.init(type: .system)
+        super.init(frame: .zero)
 
         setupMainAppereance()
         setupButton(with: buttonType)
