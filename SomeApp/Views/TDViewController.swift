@@ -46,6 +46,9 @@ final class TDViewController: BaseController {
         realmManager.getAllObjects()
     }
     
+    
+    // Setup methods
+    
     private func setupGreetingTitleText() {
         let clientName = realmManager.getClientName()
         self.greatingTitle.text = R.Strings.greatingLabelTD.rawValue  + clientName + "!"
