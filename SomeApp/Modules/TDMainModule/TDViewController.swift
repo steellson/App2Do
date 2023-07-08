@@ -11,20 +11,12 @@ import SnapKit
 
 final class TDViewController: BaseController {
     
-//    var viewModel: TDViewModelProtocol!
+    var viewModel: TDViewModel!
     
     private lazy var greatingTitle: UILabel = {
         let label = UILabel()
         label.font = .chalkboard28
         label.textColor = R.Colors.specialLimeColor
-        
-//        do {
-//            let clientName = try viewModel.clientName.value()
-//            label.text = R.Strings.greatingLabelTD.rawValue  + clientName
-//        } catch {
-//            print("clientName fetching error"); return label
-//        }
-        
         return label
     }()
     
