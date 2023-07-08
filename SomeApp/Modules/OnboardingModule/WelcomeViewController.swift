@@ -93,23 +93,27 @@ extension WelcomeViewController {
     }
 }
 
-//MARK: - Reactive
+//MARK: - Bindings Extension
 
 private extension WelcomeViewController {
     
     func setupBindings() {
-        
+        bindNameField(text: nameField.rx.text.orEmpty.asDriver())
+    }
+    
+    func bindNameField(text: Driver<String>) {
         let input = TDViewModel.Input(
-            validate: nameField.rx.text.orEmpty.asDriver()
+            text: text
         )
         
         let output = viewModel?.transform(input: input)
-            
-        output?.isValid
+        
+        // Te
+        output?.isEmpty
             .drive { [nameField] isValid in
                 nameField.layer.borderColor = isValid
                 ? R.Colors.specialLimeColor.cgColor
-                : R.Colors.specialPinkColor.cgColor
+                : R.Colors.specialWhiteColor.cgColor
             }
             .disposed(by: disposeBag)
     }

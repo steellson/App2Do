@@ -41,19 +41,19 @@ final class TDViewModel {
 extension TDViewModel: TDViewModelProtocol {
     
     struct Input {
-        let validate: Driver<String>
+        let text: Driver<String>
     }
     
     struct Output {
-        let isValid: Driver<Bool>
+        let isEmpty: Driver<Bool>
     }
     
     func transform(input: Input) -> Output {
         
-        let isValid = input.validate
-            .withLatestFrom(input.validate)
-            .map { $0.isEmpty ? false : true }
+        let isValid = input.text
+            .withLatestFrom(input.text)
+            .map { !$0.isEmpty }
 
-        return Output(isValid: isValid)
+        return Output(isEmpty: isValid)
     }
 }
