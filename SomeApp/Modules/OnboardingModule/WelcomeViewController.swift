@@ -98,23 +98,26 @@ extension WelcomeViewController {
 private extension WelcomeViewController {
     
     func setupBindings() {
-        bindNameField(text: nameField.rx.text.orEmpty.asDriver())
-    }
-    
-    func bindNameField(text: Driver<String>) {
+        
         let input = TDViewModel.Input(
-            text: text
+            text: nameField.rx.text.orEmpty.asDriver(),
+            start: startButton.rx.tap.asDriver()
         )
         
         let output = viewModel?.transform(input: input)
         
-        // Te
+        // Checkong for empty text
         output?.isEmpty
-            .drive { [nameField] isValid in
-                nameField.layer.borderColor = isValid
+            .drive { [nameField] isEmpty in
+                nameField.layer.borderColor = isEmpty
                 ? R.Colors.specialLimeColor.cgColor
                 : R.Colors.specialWhiteColor.cgColor
             }
+            .disposed(by: disposeBag)
+        
+        // Button tap
+        output?.start
+            .drive()
             .disposed(by: disposeBag)
     }
 }

@@ -8,15 +8,11 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-protocol TDViewModelProtocol {
+protocol TDViewModelTypeProtocol {
     associatedtype Input
     associatedtype Output
     
     func transform(input: Input) -> Output
-}
-
-protocol TDViewModelErrorHandlingProtocol {
-    associatedtype TDViewModelErrors
 }
 
 
@@ -36,24 +32,35 @@ final class TDViewModel {
 }
 
 
-//MARK: - TDViewModelProtocol Extension
+//MARK: - TDViewModelTypeProtocol Extension
 
-extension TDViewModel: TDViewModelProtocol {
+extension TDViewModel: TDViewModelTypeProtocol {
     
     struct Input {
         let text: Driver<String>
+        let start: Driver<Void>
     }
     
     struct Output {
         let isEmpty: Driver<Bool>
+        let start: Driver<Void>
     }
     
     func transform(input: Input) -> Output {
         
-        let isValid = input.text
+        let isEmpty = input.text
             .withLatestFrom(input.text)
             .map { !$0.isEmpty }
+        
+        let start = input.start
+            .withLatestFrom(input.text)
+            .map { [realmManager] text in
+                text.isEmpty
+                ? print("empty")
+                : realmManager.setupClient(with: text);#warning("Need to add transition")
+            }
 
-        return Output(isEmpty: isValid)
+        return Output(isEmpty: isEmpty, start: start)
     }
 }
+
