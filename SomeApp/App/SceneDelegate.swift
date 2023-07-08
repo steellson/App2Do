@@ -16,9 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        let router: AppRouterProtocol = AppRouter()
-        window.rootViewController = router.setupInitialView()
-        
+        let realmManager = RealmManager()
+        let dateService = DateService()
+        let view = WelcomeViewController()
+        let viewModel = TDViewModel(realmManager: realmManager,
+                                    dateService: dateService)
+        view.viewModel = viewModel
+        window.rootViewController = view
         window.makeKeyAndVisible()
         self.window = window
     }

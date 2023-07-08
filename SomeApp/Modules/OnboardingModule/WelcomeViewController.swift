@@ -5,9 +5,13 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 import SnapKit
 
 final class WelcomeViewController: BaseController {
+    
+    var viewModel: TDViewModel!
     
     private let greetingLabel: UILabel = {
         let label = UILabel()
@@ -30,22 +34,20 @@ final class WelcomeViewController: BaseController {
     }()
     
     private let nameField = TDTextField(R.Strings.nameFieldPlaceholder.rawValue)
-    private let startButton = UIButton(type: .system)
     
-    private let realmManager = RealmManager()
+    private let startButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(R.Strings.startButtonTitle.rawValue, for: .normal)
+        button.titleLabel?.font = .chalkboard16
+        button.tintColor = R.Colors.deepGrayBackgroundColor
+        button.backgroundColor = R.Colors.specialBlueColor
+        button.layer.cornerRadius = 12
+        button.makeBorder(of: 2)
+        button.makeShadow()
+        return button
+    }()
     
-    
-    private func setupStartButton() {
-        startButton.setTitle(R.Strings.startButtonTitle.rawValue, for: .normal)
-        startButton.titleLabel?.font = .chalkboard16
-        startButton.tintColor = R.Colors.deepGrayBackgroundColor
-        startButton.backgroundColor = R.Colors.specialBlueColor
-        startButton.layer.cornerRadius = 12
-        startButton.makeBorder(of: 2)
-        startButton.makeShadow()
-        
-        startButton.addTarget(self, action: #selector(startButtonTarget), for: .touchUpInside)
-    }
+    private let disposeBag = DisposeBag()
 }
 
 //MARK: - Base Methods Extension
@@ -54,10 +56,12 @@ extension WelcomeViewController {
     
     override func setupView() {
         super.setupView()
+        setupBindings()
         
-        [greetingLabel, nameLabel, nameField, startButton].forEach { view.addNewSubbview($0) }
-        
-        setupStartButton()
+        [
+            greetingLabel, nameLabel, nameField, startButton
+        ]
+            .forEach { view.addNewSubbview($0) }
     }
     
     override func setupLayout() {
@@ -89,20 +93,24 @@ extension WelcomeViewController {
     }
 }
 
-//MARK: - Button Target
+//MARK: - Reactive
 
 private extension WelcomeViewController {
     
-    @objc func startButtonTarget() {
-        if nameField.text != "" {
-            realmManager.setupClient(with: nameField.text!)
+    func setupBindings() {
+        
+        let input = TDViewModel.Input(
+            validate: nameField.rx.text.orEmpty.asDriver()
+        )
+        
+        let output = viewModel?.transform(input: input)
             
-            let mainViewController = TDViewController()
-            mainViewController.modalPresentationStyle = .fullScreen
-            self.present(mainViewController, animated: true)
-        } else {
-            self.nameField.placeholder = "oups :j"
-            return
-        }
+        output?.isValid
+            .drive { [nameField] isValid in
+                nameField.layer.borderColor = isValid
+                ? R.Colors.specialLimeColor.cgColor
+                : R.Colors.specialPinkColor.cgColor
+            }
+            .disposed(by: disposeBag)
     }
 }

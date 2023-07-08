@@ -77,9 +77,9 @@ final class TDCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         }
     }
     
-    override var isSelected: Bool {
+    var isOnEditing: Bool = false {
         didSet {
-            if self.isSelected {
+            if self.isOnEditing {
                 makeBorder(of: 4, color: R.Colors.specialLimeColor)
                 deleteMarkView.isHidden = false
                 editMarkView.isHidden = false
@@ -104,7 +104,6 @@ final class TDCell: UICollectionViewCell, UIGestureRecognizerDelegate {
 
         setupCell()
         setupLayout()
-        setupEditingLongGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -129,8 +128,9 @@ private extension TDCell {
         makeBorder(of: 2)
 
         [
-            textLabel, checkmarkView,
-         deleteMarkView, editMarkView].forEach { addNewSubbview($0) }
+            textLabel, checkmarkView, deleteMarkView, editMarkView
+        ]
+            .forEach { addNewSubbview($0) }
         
         checkmarkView.addNewSubbview(checkmark)
         deleteMarkView.addNewSubbview(deleteMark)
@@ -176,20 +176,5 @@ private extension TDCell {
             $0.leading.equalToSuperview().offset(sideOffset)
             $0.trailing.equalTo(checkmarkView.snp.leading).offset(sideOffset)
         }
-    }
-}
-
-//MARK: - LongPressGesture
-
-private extension TDCell {
-    func setupEditingLongGesture() {
-        let longGesture = UILongPressGestureRecognizer()
-        longGesture.minimumPressDuration = 0.5
-        longGesture.addTarget(self, action: #selector(editingLongGestureHandler))
-        addGestureRecognizer(longGesture)
-    }
-    
-    @objc func editingLongGestureHandler() {
-        isSelected.toggle()
     }
 }

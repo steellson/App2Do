@@ -10,34 +10,29 @@ import SnapKit
 final class PlainController: BaseController {
     
     private let cancelButton = TDButton(.cancelButton)
-    private var calendarCollectionView: UICollectionView!
-    private var plainScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        return scrollView
-    }()
     
-    // Setup methods
-    
-    private func setupCancelButton() {
-        cancelButton.addTarget(self, action: #selector(cancelButtonAction), for: .touchUpInside)
-    }
-    
-    private func setupCalendarCollectionView() {
+    private lazy var calendarCollectionView: UICollectionView = {
         let calLayout = UICollectionViewFlowLayout()
         calLayout.minimumLineSpacing = 10
         calLayout.scrollDirection = .horizontal
         calLayout.sectionInset = .init(top: 0, left: 10, bottom: 0, right: 10)
         calLayout.itemSize = .init(width: 60, height: 60)
         
-        calendarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: calLayout)
-        calendarCollectionView.makeShadow()
-        calendarCollectionView.layer.cornerRadius = 10
-        calendarCollectionView.showsHorizontalScrollIndicator = false
-        calendarCollectionView.backgroundColor = R.Colors.deepGrayBackgroundColor
-        calendarCollectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.cellId)
-        calendarCollectionView.dataSource = self
-        calendarCollectionView.delegate = self
-    }
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: calLayout)
+        cv.makeShadow()
+        cv.layer.cornerRadius = 10
+        cv.showsHorizontalScrollIndicator = false
+        cv.backgroundColor = R.Colors.deepGrayBackgroundColor
+        cv.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.cellId)
+        cv.dataSource = self
+        cv.delegate = self
+        return cv
+    }()
+    
+    private var plainScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
 }
 
 
@@ -48,12 +43,10 @@ extension PlainController {
     override func setupView() {
         super.setupView()
         
-        setupCancelButton()
-        setupCalendarCollectionView()
-        
         [
             cancelButton, calendarCollectionView, plainScrollView
-        ].forEach { view.addNewSubbview($0) }
+        ]
+            .forEach { view.addNewSubbview($0) }
     }
 
     override func setupLayout() {
@@ -100,21 +93,3 @@ extension PlainController: UICollectionViewDelegate {
         collectionView.reloadData()
     }
 }
-
-//MARK: - Button Actions
-
-@objc private extension PlainController {
-    
-     func cancelButtonAction() {
-         self.dismiss(animated: true)
-    }
-}
-
-
-/*
-//MARK: - PlainControllerViewProtocol Extension
-
-extension PlainController: PlainControllerViewProtocol {
-    
-}
-*/

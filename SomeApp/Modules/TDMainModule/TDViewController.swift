@@ -5,14 +5,26 @@
 
 
 import UIKit
+import RxCocoa
+import RxSwift
 import SnapKit
 
 final class TDViewController: BaseController {
     
-    private var greatingTitle: UILabel = {
+//    var viewModel: TDViewModelProtocol!
+    
+    private lazy var greatingTitle: UILabel = {
         let label = UILabel()
         label.font = .chalkboard28
         label.textColor = R.Colors.specialLimeColor
+        
+//        do {
+//            let clientName = try viewModel.clientName.value()
+//            label.text = R.Strings.greatingLabelTD.rawValue  + clientName
+//        } catch {
+//            print("clientName fetching error"); return label
+//        }
+        
         return label
     }()
     
@@ -25,7 +37,9 @@ final class TDViewController: BaseController {
     }()
     
     private let categoriesView = UIView()
+    
     private let dateLable = TDDateLabel()
+    
     private let modeSelectionView = ModeSelectionView()
     
     private let todayTasksLable: UILabel = {
@@ -37,48 +51,25 @@ final class TDViewController: BaseController {
     }()
     
     private let addButton = TDButton(.addButton)
+    
     private let plainButton = TDButton(.plainButton)
-    private var tdCollectionView: UICollectionView!
     
-    private let realmManager = RealmManager()
-    
-    private var tasks: [TaskRealmModel] {
-        realmManager.getAllObjects()
-    }
-    
-    
-    // Setup methods
-    
-    private func setupGreetingTitleText() {
-        let clientName = realmManager.getClientName()
-        self.greatingTitle.text = R.Strings.greatingLabelTD.rawValue  + clientName + "!"
-        
-    }
-    
-    private func setupAddButton() {
-        addButton.addTarget(self, action: #selector(addNewTaskButtonAction), for: .touchUpInside)
-    }
-    
-    private func setupPlainButton() {
-        plainButton.addTarget(self, action: #selector(plainButtonAction), for: .touchUpInside)
-    }
-    
-    private func setupTDCollectionView() {
+    private lazy var tdCollectionView: UICollectionView = {
         let tdLayout = UICollectionViewFlowLayout()
         tdLayout.scrollDirection = .vertical
         tdLayout.minimumLineSpacing = 30
         tdLayout.itemSize = .init(width: view.bounds.width - 40,
                                   height: view.bounds.height / 8)
-        
-        tdCollectionView = UICollectionView(frame: .zero, collectionViewLayout: tdLayout)
-        tdCollectionView.makeShadow()
-        tdCollectionView.layer.cornerRadius = 10
-        tdCollectionView.showsVerticalScrollIndicator = false
-        tdCollectionView.backgroundColor = R.Colors.deepGrayBackgroundColor
-        tdCollectionView.register(TDCell.self, forCellWithReuseIdentifier: TDCell.cellId)
-        tdCollectionView.dataSource = self
-        tdCollectionView.delegate = self
-    }
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: tdLayout)
+        cv.makeShadow()
+        cv.layer.cornerRadius = 10
+        cv.showsVerticalScrollIndicator = false
+        cv.backgroundColor = R.Colors.deepGrayBackgroundColor
+        cv.register(TDCell.self, forCellWithReuseIdentifier: TDCell.cellId)
+//        cv.dataSource = self
+//        cv.delegate = self
+        return cv
+    }()
 }
 
 
@@ -88,15 +79,12 @@ extension TDViewController {
     
     override func setupView() {
         super.setupView()
-        setupGreetingTitleText()
-        setupAddButton()
-        setupPlainButton()
-        setupTDCollectionView()
         
         [
             greatingTitle, greatingSubtitle, categoriesView, dateLable,
             modeSelectionView, addButton, plainButton, todayTasksLable, tdCollectionView
-        ].forEach { view.addNewSubbview($0) }
+        ]
+            .forEach { view.addNewSubbview($0) }
     }
     
     override func setupLayout() {
@@ -158,55 +146,3 @@ extension TDViewController {
     }
 }
 
-
-//MARK: - DS / Delegates
-
-extension TDViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tasks.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let tdCell = collectionView.dequeueReusableCell(withReuseIdentifier: TDCell.cellId,
-                                                              for: indexPath) as? TDCell else { return UICollectionViewCell() }
-        let task = tasks[indexPath.item]
-        tdCell.configureCell(with: task.text, isDone: task.isDone)
-        return tdCell
-    }
-}
-
-extension TDViewController: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let task = tasks[indexPath.item]
-        realmManager.switchObjectState(forKey: task._id)
-        collectionView.reloadData()
-    }
-}
-
-
-//MARK: - Button Actions
-
-@objc private extension TDViewController {
-    
-    func addNewTaskButtonAction() {
-        let addTaskController = AddTaskController()
-        addTaskController.modalPresentationStyle = .fullScreen
-        self.present(addTaskController, animated: true)
-    }
-    
-    func plainButtonAction() {
-        let plainController = PlainController()
-        plainController.modalPresentationStyle = .fullScreen
-        self.present(plainController, animated: true)
-    }
-}
-
-/*
- //MARK: - TDViewControllerViewProtocol Extension
- 
- extension TDViewController: TDViewControllerViewProtocol {
- 
- }
- */
