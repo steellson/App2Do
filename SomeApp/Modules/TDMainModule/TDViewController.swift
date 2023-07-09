@@ -11,7 +11,7 @@ import SnapKit
 
 final class TDViewController: BaseController {
     
-    var viewModel: TDViewModel!
+    private var viewModel: TDViewModelProtocol!
     
     private lazy var greatingTitle: UILabel = {
         let label = UILabel()

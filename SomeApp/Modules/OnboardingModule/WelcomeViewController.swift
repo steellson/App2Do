@@ -10,9 +10,7 @@ import RxSwift
 import SnapKit
 
 final class WelcomeViewController: BaseController {
-    
-    var viewModel: TDViewModel!
-    
+        
     private let greetingLabel: UILabel = {
         let label = UILabel()
         label.text = R.Strings.greetingLabel.rawValue
@@ -48,6 +46,9 @@ final class WelcomeViewController: BaseController {
     }()
     
     private let disposeBag = DisposeBag()
+    
+    private var viewModel: TDViewModelProtocol!
+    var viewModelBuilder: TDViewModelProtocol.ViewModelBuilder!
 }
 
 //MARK: - Base Methods Extension
@@ -99,25 +100,36 @@ private extension WelcomeViewController {
     
     func setupBindings() {
         
-        let input = TDViewModel.Input(
+        viewModel = viewModelBuilder((
             text: nameField.rx.text.orEmpty.asDriver(),
-            start: startButton.rx.tap.asDriver()
-        )
-        
-        let output = viewModel?.transform(input: input)
+            startTap: startButton.rx.tap.asDriver()
+        ))
         
         // Checkong for empty text
-        output?.isEmpty
+        viewModel.output.isEmpty
             .drive { [nameField] isEmpty in
                 nameField.layer.borderColor = isEmpty
                 ? R.Colors.specialLimeColor.cgColor
                 : R.Colors.specialWhiteColor.cgColor
             }
             .disposed(by: disposeBag)
-        
+
         // Button tap
-        output?.start
-            .drive()
+        viewModel.output.start
+            .drive(
+                onNext: { [nameField] _ in
+                    if nameField.hasText {
+                        let tdViewController = TDViewController()
+                        tdViewController.modalPresentationStyle = .fullScreen
+                        self.present(tdViewController, animated: true)
+                    }
+                },
+                onCompleted: {
+                    print("Completed")
+                },
+                onDisposed: {
+                    print("Disposed")
+                })
             .disposed(by: disposeBag)
     }
 }

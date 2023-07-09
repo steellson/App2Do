@@ -35,6 +35,9 @@
 		3DB45C9E2A585AD600999750 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB45C9D2A585AD600999750 /* RxRelay */; };
 		3DB45CA02A585AD600999750 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB45C9F2A585AD600999750 /* RxSwift */; };
 		3DB45CA22A585CE600999750 /* TDViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45CA12A585CE600999750 /* TDViewModel.swift */; };
+		3DB45CAE2A5B326800999750 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45CAD2A5B326800999750 /* Coordinator.swift */; };
+		3DB45CB02A5B352900999750 /* TDCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45CAF2A5B352900999750 /* TDCoordinator.swift */; };
+		3DB45CB22A5B3B6100999750 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB45CB12A5B3B6100999750 /* AppCoordinator.swift */; };
 		3DCC8B0B2A1E118800204A82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0A2A1E118800204A82 /* AppDelegate.swift */; };
 		3DCC8B0D2A1E118800204A82 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0C2A1E118800204A82 /* SceneDelegate.swift */; };
 		3DCC8B0F2A1E118800204A82 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8B0E2A1E118800204A82 /* WelcomeViewController.swift */; };
@@ -65,6 +68,9 @@
 		3DB45C882A45E47E00999750 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		3DB45C8A2A45ED6200999750 /* TDDateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDDateLabel.swift; sourceTree = "<group>"; };
 		3DB45CA12A585CE600999750 /* TDViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDViewModel.swift; sourceTree = "<group>"; };
+		3DB45CAD2A5B326800999750 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		3DB45CAF2A5B352900999750 /* TDCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDCoordinator.swift; sourceTree = "<group>"; };
+		3DB45CB12A5B3B6100999750 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		3DCC8B072A1E118800204A82 /* SomeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DCC8B0A2A1E118800204A82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DCC8B0C2A1E118800204A82 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +131,7 @@
 			children = (
 				3DCC8B0A2A1E118800204A82 /* AppDelegate.swift */,
 				3DCC8B0C2A1E118800204A82 /* SceneDelegate.swift */,
+				3DB45CB32A5B3BC600999750 /* Coordination */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -179,6 +186,7 @@
 		3DB45C922A5856DF00999750 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				3DB45CAF2A5B352900999750 /* TDCoordinator.swift */,
 				3DB45CA12A585CE600999750 /* TDViewModel.swift */,
 				3DB45C942A58570200999750 /* TDMainModule */,
 				3DB45C952A5857DD00999750 /* OnboardingModule */,
@@ -221,6 +229,15 @@
 				3DB45C4D2A3B89D700999750 /* AddTaskController.swift */,
 			);
 			path = NewTaskModule;
+			sourceTree = "<group>";
+		};
+		3DB45CB32A5B3BC600999750 /* Coordination */ = {
+			isa = PBXGroup;
+			children = (
+				3DB45CB12A5B3B6100999750 /* AppCoordinator.swift */,
+				3DB45CAD2A5B326800999750 /* Coordinator.swift */,
+			);
+			path = Coordination;
 			sourceTree = "<group>";
 		};
 		3DCC8AFE2A1E118800204A82 = {
@@ -339,7 +356,9 @@
 			files = (
 				3DCC8B0F2A1E118800204A82 /* WelcomeViewController.swift in Sources */,
 				3D6E6AAE2A1E92470072A9C4 /* UIView+Extension.swift in Sources */,
+				3DB45CAE2A5B326800999750 /* Coordinator.swift in Sources */,
 				3D68C0AA2A1FFB18005BB354 /* TDCell.swift in Sources */,
+				3DB45CB02A5B352900999750 /* TDCoordinator.swift in Sources */,
 				3DB45BFB2A25434B00999750 /* ModeSelectionView.swift in Sources */,
 				3DB45C1D2A2F86FE00999750 /* TaskRealmModel.swift in Sources */,
 				3DCC8B0B2A1E118800204A82 /* AppDelegate.swift in Sources */,
@@ -355,6 +374,7 @@
 				3D68C0A82A1FC4C6005BB354 /* TDViewController.swift in Sources */,
 				3DB45C502A3B9B1E00999750 /* DateService.swift in Sources */,
 				3DB45C4A2A38CC0900999750 /* ClientRealmModel.swift in Sources */,
+				3DB45CB22A5B3B6100999750 /* AppCoordinator.swift in Sources */,
 				3DB45C002A267C4B00999750 /* UIFont+Extension.swift in Sources */,
 				3DB45CA22A585CE600999750 /* TDViewModel.swift in Sources */,
 				3DB45C522A3BA10F00999750 /* PlainController.swift in Sources */,

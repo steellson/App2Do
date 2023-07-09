@@ -16,22 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        let realmManager = RealmManager()
-        let dateService = DateService()
-        let viewModel = TDViewModel(realmManager: realmManager,
-                                    dateService: dateService)
-        // Onboarding
-        if realmManager.checkOnboarding() {
-            let view = WelcomeViewController()
-            view.viewModel = viewModel
-            window.rootViewController = view
-        } else {
-            let view = TDViewController()
-            view.viewModel = viewModel
-            window.rootViewController = view
-        }
-        
-        window.makeKeyAndVisible()
+        AppCoordinator(window: window).start()
         self.window = window
     }
     

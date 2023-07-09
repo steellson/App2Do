@@ -8,56 +8,57 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-protocol TDViewModelTypeProtocol {
-    associatedtype Input
-    associatedtype Output
+protocol TDViewModelProtocol {
     
-    func transform(input: Input) -> Output
+    typealias Input = (
+        text: Driver<String>,
+        startTap: Driver<Void>
+    )
+    
+    typealias Output = (
+        isEmpty: Driver<Bool>,
+        start: Driver<Void>
+    )
+    
+    typealias ViewModelBuilder = (TDViewModelProtocol.Input) -> TDViewModelProtocol
+    
+    var input: TDViewModelProtocol.Input { get }
+    var output: TDViewModelProtocol.Output { get }
+    
+    static func transform(input: TDViewModelProtocol.Input) -> TDViewModelProtocol.Output
 }
 
 
-final class TDViewModel {
+final class TDViewModel: TDViewModelProtocol {
     
-    private let realmManager: RealmManager
-    private let dateService: DateServiceProtocol
+    private let realmManager: RealmManager = RealmManager()
+    private let dateService: DateServiceProtocol = DateService()
     private let disposeBag = DisposeBag()
     
+    var input: (text: Driver<String>, startTap: Driver<Void>)
+    var output: (isEmpty: Driver<Bool>, start: Driver<Void>)
     
-    init(realmManager: RealmManager,
-         dateService: DateServiceProtocol) {
+    init(input: (text: Driver<String>,
+                 startTap: Driver<Void>)) {
         
-        self.realmManager = realmManager
-        self.dateService = dateService
-    }
-}
-
-
-//MARK: - TDViewModelTypeProtocol Extension
-
-extension TDViewModel: TDViewModelTypeProtocol {
-    
-    struct Input {
-        let text: Driver<String>
-        let start: Driver<Void>
+        self.input = input
+        self.output = TDViewModel.transform(input: (text: input.text,
+                                                    startTap: input.startTap))
     }
     
-    struct Output {
-        let isEmpty: Driver<Bool>
-        let start: Driver<Void>
-    }
-    
-    func transform(input: Input) -> Output {
+    static func transform(input: TDViewModelProtocol.Input) -> TDViewModelProtocol.Output {
         
         let isEmpty = input.text
             .withLatestFrom(input.text)
             .map { !$0.isEmpty }
         
-        let start = input.start
+        let start = input.startTap
             .withLatestFrom(input.text)
-            .map { [realmManager] text in
-                text.isEmpty
-                ? print("empty")
-                : realmManager.setupClient(with: text);#warning("Need to add transition")
+            .map { text in
+                print(text)
+//                if !text.isEmpty {
+//                    realmManager.setupClient(with: text)
+//                }
             }
 
         return Output(isEmpty: isEmpty, start: start)
