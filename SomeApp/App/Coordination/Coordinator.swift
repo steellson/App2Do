@@ -10,6 +10,7 @@ protocol CoordinatorProtocol: AnyObject {
     var childCoordinators: [CoordinatorProtocol] { get set }
     
     func start()
+    func goMain()
 }
 
 extension CoordinatorProtocol {
@@ -29,7 +30,7 @@ class Coordinator: CoordinatorProtocol {
     
     var childCoordinators: [CoordinatorProtocol] = []
 
-    func start() {
-        fatalError("Childs should emplement Start function")
-    }
+    func start() { fatalError("Childs should emplement Start function") }
+    
+    func goMain() { fatalError("Childs should emplement GoMain function") }
 }

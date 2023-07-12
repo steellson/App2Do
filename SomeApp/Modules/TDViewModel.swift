@@ -8,60 +8,58 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-protocol TDViewModelProtocol {
+protocol TDViewModelTypeProtocol {
+    associatedtype Input
+    associatedtype Output
     
-    typealias Input = (
-        text: Driver<String>,
-        startTap: Driver<Void>
-    )
-    
-    typealias Output = (
-        isEmpty: Driver<Bool>,
-        start: Driver<Void>
-    )
-    
-    typealias ViewModelBuilder = (TDViewModelProtocol.Input) -> TDViewModelProtocol
-    
-    var input: TDViewModelProtocol.Input { get }
-    var output: TDViewModelProtocol.Output { get }
-    
-    static func transform(input: TDViewModelProtocol.Input) -> TDViewModelProtocol.Output
+    func transform(input: Input) -> Output
 }
 
 
-final class TDViewModel: TDViewModelProtocol {
+final class TDViewModel: TDViewModelTypeProtocol {
     
-    private let realmManager: RealmManager = RealmManager()
-    private let dateService: DateServiceProtocol = DateService()
-    private let disposeBag = DisposeBag()
-    
-    var input: (text: Driver<String>, startTap: Driver<Void>)
-    var output: (isEmpty: Driver<Bool>, start: Driver<Void>)
-    
-    init(input: (text: Driver<String>,
-                 startTap: Driver<Void>)) {
-        
-        self.input = input
-        self.output = TDViewModel.transform(input: (text: input.text,
-                                                    startTap: input.startTap))
+    struct Input {
+        let nameFieldText: Driver<String>
+        let startButtonTap: Driver<Void>
     }
     
-    static func transform(input: TDViewModelProtocol.Input) -> TDViewModelProtocol.Output {
+    struct Output {
+        let nameFieldEmpty: Driver<Bool>
+        let startButtonTapped: Driver<Void>
+    }
+    
+    private let coordinator: Coordinator
+    private let realmManager: RealmManager
+    private let dateService: DateServiceProtocol
+    private let disposeBag = DisposeBag()
+    
+    
+    init(coordinator: Coordinator,
+         realmManager: RealmManager,
+         dateService: DateServiceProtocol) {
         
-        let isEmpty = input.text
-            .withLatestFrom(input.text)
-            .map { !$0.isEmpty }
+        self.coordinator = coordinator
+        self.realmManager = realmManager
+        self.dateService = dateService
+    }
+    
+    func transform(input: Input) -> Output {
         
-        let start = input.startTap
-            .withLatestFrom(input.text)
-            .map { text in
-                print(text)
-//                if !text.isEmpty {
-//                    realmManager.setupClient(with: text)
-//                }
+        let nameFieldIsEmpty = input.nameFieldText
+            .withLatestFrom(input.nameFieldText)
+            .map { $0.isEmpty }
+        
+        let startButtonTapped = input.startButtonTap
+            .withLatestFrom(input.nameFieldText)
+            .map { [realmManager, coordinator] nameFieldText in
+                if !nameFieldText.isEmpty {
+                    realmManager.setupClient(with: nameFieldText)
+                    coordinator.goMain()
+                }
             }
-
-        return Output(isEmpty: isEmpty, start: start)
+        
+        return Output(nameFieldEmpty: nameFieldIsEmpty,
+                      startButtonTapped: startButtonTapped)
     }
 }
 

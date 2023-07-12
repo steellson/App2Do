@@ -10,7 +10,9 @@ import RxSwift
 import SnapKit
 
 final class WelcomeViewController: BaseController {
-        
+    
+    var viewModel: TDViewModel!
+    
     private let greetingLabel: UILabel = {
         let label = UILabel()
         label.text = R.Strings.greetingLabel.rawValue
@@ -47,8 +49,6 @@ final class WelcomeViewController: BaseController {
     
     private let disposeBag = DisposeBag()
     
-    private var viewModel: TDViewModelProtocol!
-    var viewModelBuilder: TDViewModelProtocol.ViewModelBuilder!
 }
 
 //MARK: - Base Methods Extension
@@ -94,42 +94,33 @@ extension WelcomeViewController {
     }
 }
 
-//MARK: - Bindings Extension
+//MARK: - Rx-Bindings Extension
 
 private extension WelcomeViewController {
     
     func setupBindings() {
         
-        viewModel = viewModelBuilder((
-            text: nameField.rx.text.orEmpty.asDriver(),
-            startTap: startButton.rx.tap.asDriver()
-        ))
+        let input = TDViewModel.Input(
+            nameFieldText: nameField.rx.text.orEmpty.asDriver(),
+            startButtonTap: startButton.rx.tap.asDriver()
+        )
         
-        // Checkong for empty text
-        viewModel.output.isEmpty
-            .drive { [nameField] isEmpty in
-                nameField.layer.borderColor = isEmpty
-                ? R.Colors.specialLimeColor.cgColor
-                : R.Colors.specialWhiteColor.cgColor
-            }
-            .disposed(by: disposeBag)
-
-        // Button tap
-        viewModel.output.start
+        let output = viewModel?.transform(input: input)
+        
+        // Setup nameField border color
+        output?.nameFieldEmpty
             .drive(
-                onNext: { [nameField] _ in
-                    if nameField.hasText {
-                        let tdViewController = TDViewController()
-                        tdViewController.modalPresentationStyle = .fullScreen
-                        self.present(tdViewController, animated: true)
-                    }
+                onNext: { [nameField] isEmpty in
+                    nameField.layer.borderColor = isEmpty
+                    ? R.Colors.specialWhiteColor.cgColor
+                    : R.Colors.specialLimeColor.cgColor
                 },
-                onCompleted: {
-                    print("Completed")
-                },
-                onDisposed: {
-                    print("Disposed")
-                })
+                onCompleted: { print("Completed") },
+                onDisposed: { print("Disposed") }
+            ).disposed(by: disposeBag)
+        
+        output?.startButtonTapped
+            .drive()
             .disposed(by: disposeBag)
     }
 }

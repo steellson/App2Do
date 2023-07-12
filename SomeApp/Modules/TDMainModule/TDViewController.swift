@@ -11,7 +11,7 @@ import SnapKit
 
 final class TDViewController: BaseController {
     
-    private var viewModel: TDViewModelProtocol!
+    var viewModel: TDViewModel!
     
     private lazy var greatingTitle: UILabel = {
         let label = UILabel()
@@ -71,7 +71,7 @@ extension TDViewController {
     
     override func setupView() {
         super.setupView()
-        
+        setupBindings()
         [
             greatingTitle, greatingSubtitle, categoriesView, dateLable,
             modeSelectionView, addButton, plainButton, todayTasksLable, tdCollectionView
@@ -138,3 +138,12 @@ extension TDViewController {
     }
 }
 
+//MARK: - Rx-Bindings Extension
+
+private extension TDViewController {
+    
+    func setupBindings() {
+        
+        
+    }
+}

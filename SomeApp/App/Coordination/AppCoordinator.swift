@@ -6,7 +6,7 @@
 
 import UIKit
 
-final class AppCoordinator: Coordinator {
+class AppCoordinator: Coordinator {
     
     private let window: UIWindow
     
